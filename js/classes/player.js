@@ -1,14 +1,15 @@
 export class Player {
-    constructor(scene, name, urlImage){
+    constructor(scene, name, urlImage, urlJson){
         this.scene = scene
         this.name = name
+        this.urlJson = urlJson
         this.urlImage = urlImage
         this.keyW;
         this.keyA;
         this.keyS;
         this.keyD;
 
-        this.scene.load.image(this.name, this.urlImage)
+        this.scene.load.atlas(this.name, this.urlImage, this.urlJson)
     }
 
     loadKeys(){
@@ -17,24 +18,52 @@ export class Player {
         this.keyA = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A)
         this.keyS = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S)
         this.keyD = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D)
+        this.keyR = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R)
     }
 
     updateKeys(scenePlayer){
-        if(this.keyW.isDown){
-            scenePlayer.setVelocityY(-100)
-        }
+        
         if(this.keyA.isDown){
-            scenePlayer.setVelocityX(-100)
+            scenePlayer.setVelocityX(-200)
+            if (scenePlayer.body.onFloor()) {
+                scenePlayer.play('idle', false);
+                scenePlayer.play('walk', true);
+              }
         }
-        if(this.keyS.isDown){
-            scenePlayer.setVelocityY(100)
+        else if(this.keyD.isDown){
+            scenePlayer.setVelocityX(200)
+            if (scenePlayer.body.onFloor()) {
+                scenePlayer.play('idle', false);
+                scenePlayer.play('walk', true);
+                
+              }
         }
-        if(this.keyD.isDown){
-            scenePlayer.setVelocityX(100)
+        else{
+            scenePlayer.setVelocityX(0)
+            if (scenePlayer.body.onFloor()) {
+                scenePlayer.play('idle', true);
+              }
+        }
+
+        if(this.keyW.isDown && scenePlayer.body.onFloor()){
+            scenePlayer.setVelocityY(-800)
+            scenePlayer.play('jump', true)
+        }
+
+        //Haciendo la reflexion para la izquierda
+        if (scenePlayer.body.velocity.x > 0) {
+            scenePlayer.setFlipX(false);
+          } else if (scenePlayer.body.velocity.x < 0) {
+            // otherwise, make them face the other side
+            scenePlayer.setFlipX(true);
+          }
+
+        if(this.keyR.isDown){
+            scenePlayer.setPosition(24,200)
         }
     }
 
     enablePlayer(){
-        return this.scene.physics.add.image(400,400,this.name) 
+        return this.scene.physics.add.sprite(0,0,this.name) 
     }
 }
