@@ -7,7 +7,7 @@ export class worldOne extends Phaser.Scene{
     preload(){
 
         //Cargando el entorno
-        this.load.image('bg-level1', '../../src/gameAssets/environment/bg-nivel1.png')
+        this.load.image('gameover', '../../src/gameAssets/environment/gameover.png')
         //Cargando el jugador
         this.prota = new Player(this, 'player', '../../src/gameAssets/characters/prota-frames.png','../../src/gameDataSources/characters/prota.json')
         this.prota.loadKeys()
@@ -19,11 +19,18 @@ export class worldOne extends Phaser.Scene{
     }
 
     create(){
+
+        
         //Creando el mapa y añadiendole el tileset.
         const map = this.make.tilemap({key:'map'})
-        const bgSet = map.addTilesetImage('bgLevelOneChiquito', 'tiles')
+        const bgSet = map.addTilesetImage('bgLevelOne16x16', 'tiles')
+        const sqreBgSet = map.addTilesetImage('bg-with-squares', 'tiles2')
         map.createStaticLayer('background', bgSet, 0, 0)
 
+
+        //Creando el game over
+        this.gameOverImage = this.add.image(256, 288, 'gameover')
+        this.gameOverImage.visible = false
         //Añadir jugador a las fisicas del juego
         this.player = this.prota.enablePlayer()
         this.player.setBounce(0.1)
@@ -35,43 +42,33 @@ export class worldOne extends Phaser.Scene{
         platforms.setCollisionByExclusion(-1, true)
         this.physics.add.collider(this.player, platforms)
 
-        //Creando la animacion de movimiento horizontal
-        this.anims.create({
-            key: 'walk',
-            frames: this.anims.generateFrameNames('player', {
-                prefix: 'prota_walk_',
-                start: 0,
-                end: 7,
-            }),
-            frameRate: 10,
-            repeat: -1
+        //Creando las animaciones del protagonista
+        this.prota.createAnimations()
+
+        //Creando los objetos que dan muerte al personaje
+        this.deathBlocks = this.physics.add.group({
+            allowGravity: false,
+            immovable: true
         })
 
-        //Creando una animacion de inactividad
-        this.anims.create({
-            key : 'idle',
-            frames: this.anims.generateFrameNames('player', {
-                prefix: 'prota_stand_',
-                start: 0,
-                end: 1,
-            }),
-            frameRate : 3,
-            repeat: -1
+        map.getObjectLayer('death').objects.forEach((block) => {
+            const deathBlock = this.deathBlocks.create(block.x, block.y, '')
+            deathBlock.setVisible(false)
         })
 
-        //Creando una animacion de salto
-        this.anims.create({
-            key : 'jump',
-            frames: this.anims.generateFrameNames('player', {
-                prefix: 'prota_jump_',
-                start: 1,
-                end: 7,
-            }),
-            frameRate : 5,
-        })
+        this.physics.add.collider(this.player, this.deathBlocks, playerHit, null, this)
     }
 
     update(){
         this.prota.updateKeys(this.player)
     }
 }
+
+function playerHit(player, scene){
+    
+        player.play('death', true)
+        player.disableBody()
+        scene.scene.gameOverImage.visible = true
+}
+
+

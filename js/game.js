@@ -2,6 +2,7 @@ import {worldOne} from "./scenes/worldOne.js";
 
 const config = {
     //Decide si el navgador usa canvas o webGL
+    parent: 'juego',
     type: Phaser.AUTO,
     width: 800,
     height: 608,
@@ -14,7 +15,7 @@ const config = {
             gravity:{y : 1500},
             debug : false
         }
-    }
+    },
 }
 
 let game = new Phaser.Game(config)
