@@ -12,49 +12,18 @@ export class worldOne extends Phaser.Scene{
         this.prota = new Player(this, 'player', '../../src/gameAssets/characters/prota-frames.png','../../src/gameDataSources/characters/prota.json')
         this.prota.loadKeys()
 
-        //Cargando el TileMap y las imagenes de los Tilesets
-        this.load.image('bg', '../../src/gameAssets/environment/bg-nivel1-ampliado.png')
-        this.load.image('brush', '../../src/gameAssets/environment/Sprites/brush.png')
-        this.load.image('buildings', '../../src/gameAssets/environment/Sprites/Buildings.png')
-        this.load.image('props-rocks', '../../src/gameAssets/environment/Sprites/Props-Rocks.png')
-        this.load.image('assets1', '../../src/gameAssets/environment/Sprites/assets1.png')
-        this.load.image('assets2', '../../src/gameAssets/environment/Sprites/assets2.png')
-        this.load.image('tiles2', '../../src/gameAssets/environment/red-sqre.png')
-
-        this.load.image('salt', '../../src/gameAssets/environment/Sprites/Salt.png')
-        this.load.image('church', '../../src/gameAssets/environment/Sprites/church.png')
-
-        //Cargando el JSON con la info del mapa
+        //Cargando el TileMap y la imagen del Tileset
+        this.load.image('mapPNG', '../../src/gameAssets/environment/map-level1.png')
         this.load.tilemapTiledJSON('map', '../../src/gameDataSources/mapData.json')
         
     }
 
     create(){
 
-        
         //Creando el mapa y añadiendole el tileset.
         const map = this.make.tilemap({key:'map'})
-        /**
-         * Creando los layers y añadiendoles los tilesets 
-         * Primer argumento: nombre del Tileset
-         * Segundo argumento: nombre de la imagen precargada relacionada al tileset
-        */
-        const bgSet_0 = map.addTilesetImage('bgLevelOneExtended', 'bg')
-        const brush = map.addTilesetImage('brush', 'brush')
-        const buildings = map.addTilesetImage('Buildings', 'buildings')
-        const props_rocks = map.addTilesetImage('Props-Rocks', 'props-rocks')
-        const assets1 = map.addTilesetImage('assets1', 'assets1')
-        const assets2 = map.addTilesetImage('Objects', 'assets2')
-        /**
-         * Ahora añadimos los layers al mapa
-         * Primer argumento: Indice del layer en el JSON del mapa
-         * Segundo argumento: Tileset creado
-         */     
-        map.createStaticLayer(0, bgSet_0, 0, 0)
-        map.createStaticLayer(1, buildings, 0,0)
-        map.createStaticLayer(2, [assets1, brush, assets2], 0, 0)
-        map.createStaticLayer(3, [assets1, brush, buildings, assets2], 0, 0)
-        
+        const bgSet = map.addTilesetImage('map-level1', 'mapPNG')
+        map.createStaticLayer('background', bgSet, 0, 0)
 
 
         //Creando el game over
@@ -63,11 +32,10 @@ export class worldOne extends Phaser.Scene{
         //Añadir jugador a las fisicas del juego
         this.player = this.prota.enablePlayer()
         this.player.setBounce(0.1)
-        //Colisiones con el borde del mapa
-        this.player.setCollideWorldBounds(true) 
+       
 
         //Creando las plataformas
-        const platforms = map.createStaticLayer(4, bgSet_0,0,0)
+        const platforms = map.createStaticLayer('platforms', bgSet,0,0)
         platforms.setCollisionByExclusion(-1, true)
         this.physics.add.collider(this.player, platforms)
 
@@ -80,14 +48,22 @@ export class worldOne extends Phaser.Scene{
             immovable: true
         })
 
+        //Para cada objeto del layer creamos un bloque en el juego, invisible.
         map.getObjectLayer('death').objects.forEach((block) => {
             const deathBlock = this.deathBlocks.create(block.x, block.y, '')
             deathBlock.setVisible(false)
         })
-
+        
+        //Añadimos una colision y una funcion de muerte en caso de darse
         this.physics.add.collider(this.player, this.deathBlocks, playerHit, null, this)
-    
-        this.cameras.main.startFollow(this.player)
+        
+        //Definimos los limites reales del juego y de la camara (para que siga al jugador)
+        this.cameras.main.setBounds(0,0, 1200,608)
+        this.physics.world.setBounds(0,0, 1200,608)
+        //Funcion para que la camara principal siga al jugador
+        this.cameras.main.startFollow(this.player, true, 1,1)
+         //Activamos las colisiones con el borde del mapa
+         this.player.setCollideWorldBounds(true) 
     }
 
     update(){
@@ -101,5 +77,4 @@ function playerHit(player, scene){
         player.disableBody()
         scene.scene.gameOverImage.visible = true
 }
-
 
