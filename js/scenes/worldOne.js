@@ -8,6 +8,7 @@ export class worldOne extends Phaser.Scene{
 
         //Cargando el entorno
         this.load.image('gameover', '../../src/gameAssets/environment/gameover.png')
+        this.load.spritesheet('wasd', '../../src/gameAssets/environment/MainMenu/components/wasd.png', {frameWidth: 250, frameHeight: 117})
         //Cargando el jugador
         this.prota = new Player(this, 'player', '../../src/gameAssets/characters/prota-frames.png','../../src/gameDataSources/characters/prota.json')
         this.prota.loadKeys()
@@ -19,6 +20,7 @@ export class worldOne extends Phaser.Scene{
     }
 
     create(){
+
 
         //Creando el mapa y añadiendole el tileset.
         const map = this.make.tilemap({key:'map'})
@@ -64,6 +66,9 @@ export class worldOne extends Phaser.Scene{
         this.cameras.main.startFollow(this.player, true, 1,1)
          //Activamos las colisiones con el borde del mapa
          this.player.setCollideWorldBounds(true) 
+
+         this.wasd = this.add.sprite(625,80,'wasd')
+
     }
 
     update(){
@@ -71,6 +76,9 @@ export class worldOne extends Phaser.Scene{
     }
 }
 
+/**
+ * Esta funcion mata al jugador
+ */
 function playerHit(player, scene){
     
         player.play('death', true)
