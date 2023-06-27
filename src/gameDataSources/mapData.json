@@ -23,7 +23,7 @@
          "height":38,
          "id":7,
          "name":"platforms",
-         "opacity":0,
+         "opacity":1,
          "type":"tilelayer",
          "visible":true,
          "width":75,
@@ -376,9 +376,32 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":11,
+         "name":"win",
+         "objects":[
+                {
+                 "gid":6505,
+                 "height":16,
+                 "id":117,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":1136,
+                 "y":584
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":11,
- "nextobjectid":100,
+ "nextlayerid":12,
+ "nextobjectid":118,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.1",
