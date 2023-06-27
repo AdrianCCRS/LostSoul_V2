@@ -5,6 +5,7 @@ export class worldOne extends Phaser.Scene{
         super({ key : "worldOne"});
         //Cargando componentes
         this.menuBar = new menuBar(this)
+        this.timerItem = new timer(this)
     }
 
     preload(){
@@ -20,7 +21,7 @@ export class worldOne extends Phaser.Scene{
         this.load.tilemapTiledJSON('map', '../../src/gameDataSources/mapData.json')
 
         this.menuBar.preload()
-
+        this.timerItem.preload()
     }
 
     create(){
@@ -64,7 +65,7 @@ export class worldOne extends Phaser.Scene{
 
         map.getObjectLayer('win').objects.forEach((block) => {
             const winBlock = this.winBlocks.create(block.x, block.y, '')
-            winBlock.setVisible(true)
+            winBlock.setVisible(false)
         })
 
         //Añadimos una colision y una funcion de muerte en caso de darse
@@ -82,11 +83,12 @@ export class worldOne extends Phaser.Scene{
         this.wasd = this.add.sprite(625,80,'wasd')
         this.menuBar.create()
         
-
+        this.timerItem.create()
     }
 
     update(){
         this.prota.updateKeys(this.player)
+        this.timerItem.update()
     }
 }
 
@@ -97,7 +99,13 @@ function playerHit(player, scene){
     
         player.play('death', true)
         player.disableBody()
-        this.scene.launch('gameover')
+        this.time.addEvent({
+            delay: 1500,
+            loop: false,
+            callback: () => {
+                this.scene.launch("gameover");
+            }
+        })
 }
 
 /**
@@ -105,6 +113,60 @@ function playerHit(player, scene){
  */
 function playerWin(player){
     player.play('vanish', true)
-    this.scene.start('mainMenu')
+    this.time.addEvent({
+        delay: 600,
+        loop: false,
+        callback: () => {
+            this.scene.start("endWorldOne");
+        }
+    })
+}
+
+export class endWorldOne extends Phaser.Scene{
+    constructor(){
+        super({key: 'endWorldOne'})
+    }
+
+    preload(){
+        this.load.video('end-scene', '../../src/gameAssets/environment/WorldOne/end-scene.mp4')
+    }
+
+    create(){
+        this.endScene = this.add.video(400,304,'end-scene')
+        this.endScene.play()
+
+        this.time.addEvent({
+            delay: 5000,
+            loop: false,
+            callback: () => {
+                this.scene.start("mainMenu");
+            }
+        })
+    }
+
+    update(){
+    }
+
+}
+
+export class timer{
+    constructor(scene){
+        this.relatedScene = scene
+    }
+
+    preload(){
+        this.time = 0
+    }
+    create(){
+        this.chrono = this.relatedScene.add.text(10, 10, 'Tiempo: 0', { fontFamily: 'Arial', fontSize: 24, color: '#ffffff' });
+    }
+        
+
+    update(){
+        this.time = this.relatedScene.time.deltaTime
+
+        let timeFormat = this.time / 1000
+        this.chrono.setText('Tiempo: ' + timeFormat.toFixed(2))
+    }
 }
 

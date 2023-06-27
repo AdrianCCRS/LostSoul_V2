@@ -1,4 +1,4 @@
-import {worldOne} from "./scenes/worldOne.js"
+import {endWorldOne, worldOne} from "./scenes/worldOne.js"
 import {mainMenu} from "./scenes/mainMenu.js"
 import { pauseMenu } from "./scenes/pauseMenu.js"
 import { gameover } from "./scenes/gameover.js"
@@ -9,7 +9,7 @@ const config = {
     width: 800,
     height: 608,
     //Distintas escenas que pueda tener el juego
-    scene:[mainMenu,worldOne, pauseMenu, gameover],
+    scene:[mainMenu,worldOne, pauseMenu, gameover,endWorldOne],
     //Características físicas del juego
     physics:{
         default: "arcade",

@@ -4,7 +4,7 @@ export class menuBar{
         this.relatedScene = scene
         this.bgMenuBarItem = new bgMBar(scene)
         this.homeButtonItem = new homeButton(scene)
-        this.pauseButtonItem = new pauseButton(scene)      
+        this.pauseButtonItem = new pauseButton(scene)    
     }
 
     preload(){
@@ -98,3 +98,4 @@ export class pauseButton{
     update(){
     }
 }
+
