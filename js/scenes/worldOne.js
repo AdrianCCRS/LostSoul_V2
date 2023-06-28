@@ -22,7 +22,7 @@ export class worldOne extends Phaser.Scene{
     }
 
     create(){
-        this.chrono = this.add.text(160, 7, '0:00', { fontFamily: 'Times New Roman', fontSize: 24, color: 'black' });
+        
         this.createClock()
 
         //Configurando el mapa.
@@ -41,17 +41,20 @@ export class worldOne extends Phaser.Scene{
         platforms.setCollisionByExclusion(-1, true)
         this.physics.add.collider(this.player, platforms)
 
+        //Configurando camara e interacciones
         this.createObjects(map)
         this.configCamera()
 
-        //Añadiendo componentes extras
+        //Creando los componentes extras
         this.wasd = this.add.sprite(625,80,'wasd')
         this.menuBar.create()
+        this.chrono = this.add.text(160, 7, '0:00', { fontFamily: 'Times New Roman', fontSize: 24, color: 'black' });
+        this.chrono.setScrollFactor(0)
     }
 
     update(){
-        this.prota.updateKeys(this.player)
 
+        this.prota.updateKeys(this.player)
         if(!this.pause){ //Actualizar reloj si no esta pausado
             this.currentTime = this.clock.getElapsed()
             this.timeFormat = this.currentTime / 1000
@@ -121,7 +124,7 @@ export class worldOne extends Phaser.Scene{
 
         //Añadimos las colisiones y las funciones asociadas
         this.physics.add.collider(this.player, this.deathBlocks, this.playerHit, null, this)
-        this.physics.add.collider(this.player, this.winBlocks, this.playerWin, null, this)
+        this.physics.add.collider(this.player, this.winBlocks, playerWin, null, this)
     }
 
     /**
@@ -134,23 +137,24 @@ export class worldOne extends Phaser.Scene{
         //Funcion para que la camara principal siga al jugador
         this.cameras.main.startFollow(this.player, true, 0.5,0.5)
     }
-
-    /**
-     * Esta funcion es llamada cuando el jugador llega al objetivo
-     */
-    playerWin(){
-        this.player.play('vanish', true)
-        this.time.addEvent({
-            delay: 600,
-            loop: false,
-            callback: () => {
-                this.scene.start("endWorldOne");
-            }
-        })
-    }
 }
 
-//Escena final
+
+
+/**
+ * Esta funcion es llamada cuando el jugador llega al objetivo
+ */
+function playerWin(player){
+    player.play('vanish', true)
+    this.time.addEvent({
+        delay: 600,
+        loop: false,
+        callback: () => {
+            this.scene.start("endWorldOne");
+        }
+    })
+}
+
 export class endWorldOne extends Phaser.Scene{
     constructor(){
         super({key: 'endWorldOne'})
