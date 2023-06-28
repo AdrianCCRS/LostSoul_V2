@@ -43,7 +43,7 @@ export class creditsButton{
             this.creditsButton.setFrame(0)
         })        
         this.creditsButton.on('pointerdown', () => {
-                this.relatedScene.scene.start('worldOne')
+                this.relatedScene.scene.launch('about')
             })
     }
         

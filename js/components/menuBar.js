@@ -90,7 +90,7 @@ export class pauseButton{
         }) 
         this.pauseButton.on('pointerdown', () => {
             this.relatedScene.scene.pause('worldOne')
-            this.relatedScene.scene.launch('pauseMenu' , )
+            this.relatedScene.scene.launch('pauseMenu' , {timeScore: this.relatedScene.timeFormat.toFixed(2)})
         })
     }
         

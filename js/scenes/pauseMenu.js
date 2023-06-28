@@ -10,9 +10,12 @@ export class pauseMenu extends Phaser.Scene{
         this.pauseMenuComponentsItems.preload()
     }
 
-    create(){
+    create(data){
+        this.timeScore = data.timeScore
         this.add.image( 400,304, 'pm-bg')
         this.pauseMenuComponentsItems.create()
+        this.chrono = this.add.text(380, 485, this.timeScore, { fontFamily: 'Times New Roman', fontSize: 64, color: 'black' });
+
     }
 
     update(){
