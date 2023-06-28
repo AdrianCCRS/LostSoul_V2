@@ -145,14 +145,16 @@ export class worldOne extends Phaser.Scene{
  * Esta funcion es llamada cuando el jugador llega al objetivo
  */
 function playerWin(player){
-    player.play('vanish', true)
-    this.time.addEvent({
-        delay: 600,
-        loop: false,
-        callback: () => {
-            this.scene.start("endWorldOne");
-        }
-    })
+    if(player.body.touching.down){
+        player.play('vanish', true)
+        this.time.addEvent({
+            delay: 600,
+            loop: false,
+            callback: () => {
+                this.scene.start("endWorldOne");
+            }
+        })
+    }
 }
 
 export class endWorldOne extends Phaser.Scene{
