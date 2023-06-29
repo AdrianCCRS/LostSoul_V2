@@ -36,6 +36,7 @@ export class Player {
                 
               }
         }
+        
         else{
             scenePlayer.setVelocityX(0)
             if (scenePlayer.body.onFloor()) {
@@ -52,17 +53,20 @@ export class Player {
         if (scenePlayer.body.velocity.x > 0) {
             scenePlayer.setFlipX(false);
           } else if (scenePlayer.body.velocity.x < 0) {
-            // otherwise, make them face the other side
+           
             scenePlayer.setFlipX(true);
           }
 
         if(this.keyR.isDown){
-            if(this.scene.gameOverImage.visible == true){
+            if(this.scene.gameOver){
                 scenePlayer.play('idle', false)
                 scenePlayer.enableBody(true)
-                this.scene.gameOverImage.visible = false
+                this.scene.scene.stop('gameover')
+                this.scene.scene.start('worldOne')
             }
-            scenePlayer.setPosition(24,200)
+            else{
+                this.scene.scene.start('worldOne')
+            }
         }
     }
 
@@ -107,7 +111,6 @@ export class Player {
                 })
 
                 //Creando animacion de muerte
-                //Creando una animacion de salto
                 this.scene.anims.create({
                     key : 'death',
                     frames: this.scene.anims.generateFrameNames(this.name, {
@@ -117,6 +120,24 @@ export class Player {
                     }),
                     frameRate : 5,
                 })
+
+                //Creando animacion de desvanecimiento
+                this.scene.anims.create({
+                    key : 'vanish',
+                    frames: this.scene.anims.generateFrameNames(this.name, {
+                        prefix: 'prota_vanish_',
+                        start: 0,
+                        end: 2,
+                    }),
+                    frameRate : 5,
+                })
+    }
+
+    stopPlayer(){
+        this.keyW.reset();
+        this.keyA.reset();
+        this.keyS.reset();
+        this.keyD.reset();
     }
 
 }
