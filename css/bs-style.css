@@ -17,6 +17,30 @@
     padding-top: 20px; /* Espacio en la parte superior */
   }
 
+.footer-mod{
+    padding-left: 2%;
+    padding-right: 2%;
+    margin-bottom: 0 !important ; 
+}
+
+.main-page-items{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.mainP-item{
+    flex: 0 0 1;
+    margin: 1%;
+}
+
+a{
+    color: #db2638;
+    text-decoration: none;
+}
+a:hover{
+    color: #8a000e;
+    text-decoration: none;
+}
 
 
 
