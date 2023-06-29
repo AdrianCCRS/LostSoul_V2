@@ -18,7 +18,7 @@ El enfoque principal del proyecto ha sido el desarrollo del juego. Se ha puesto 
 
 ## Detalles técnicos
 
-La biblioteca utilizada para el desarrollo del juego es Phaser. Todos los aspectos relevantes se encuentran comentados en los archivos de JavaScript. Para mantener consistencia y comodidad durante el desarrollo, las variables se han manejado en inglés, ya que en su mayoría son nombres abreviados. Además, la estructura de Phaser está en inglés. Espero que el proyecto cumpla con las expectativas y estoy trabajando activamente en las áreas pendientes. Por hoy, he llegado a mi límite y es hora de descansar. ¡Gracias por su atención!
+La biblioteca utilizada para el desarrollo del juego es Phaser. Todos los aspectos relevantes se encuentran comentados en los archivos de JavaScript. Para mantener consistencia y comodidad durante el desarrollo, las variables se han manejado en inglés, ya que en su mayoría son nombres abreviados. Además, la estructura de Phaser está en inglés. Espero que el proyecto vaya por buen camini y estoy trabajando activamente en las áreas pendientes. ¡Gracias por su atención!
 
 ## Branch para revisión
 
