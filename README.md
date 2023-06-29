@@ -1,4 +1,4 @@
-# LostSoul_V2
+# LostSoul_V2 (IMPORTATNTE: DIRIJASE A LA BRANCH `entregable-segundo-avance`)
 
 Proyecto para programación en la web hecho por: Yeison Adrián Cáceres Torres
 
