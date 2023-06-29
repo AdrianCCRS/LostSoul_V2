@@ -26,4 +26,4 @@ Por favor, revise la branch llamada `entregable-segundo-avance` para acceder a l
 
 ## Comentarios adicionales
 
-Puedo incluir cualquier comentario o información adicional que sea relevante para el proyecto o para su evaluación. Si hay algún aspecto específico que desee destacar o revisar, por favor avíseme y estaré encantado de proporcionar más detalles.
+Quedo atento a sus sugerencias y retroalimentación.
