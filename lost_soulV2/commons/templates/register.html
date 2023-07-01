@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+
+{% block extrahead %}
+<title>Registro | LostSoul</title>
+<style>
+    body {
+        background: #6f1120;
+        background: linear-gradient(to right, #6f1120, #e70027);
+      }
+      .form-check-input:checked {
+        background-color: #dc3545;
+        border: 1px solid #dc3545; 
+    }
+    .form-check-input:not(:checked) {
+        border: 1px solid #dc3545; 
+    }
+    .form-check-input:focus {
+        border-color: #dc3545; 
+    }
+      
+</style>
+{% endblock extrahead %}
+{% block content %}
+    <section>
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md">
+                <div class="card text-black" style="border-radius: 25px;">
+                    <div class="card-body p-md-5">
+                        <div class="row justify-content-center">
+                            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Registro de nuevo usuario</p>
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        {% if message.tags == 'error' %}
+                                            <div class="alert alert-danger" role="alert">{{ message }}</div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}                            
+                                <form action="{% url 'registro'%}"class="mx-1 mx-md-4" method="post">
+                                    {% csrf_token %}
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label for="{{ register_form.username.id_for_label }}">Tu username</label>
+                                            <input type="text" class="form-control" id="{{ register_form.username.id_for_label }}" name="{{ register_form.username.html_name }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label for="{{ register_form.email.id_for_label }}">Tu correo electrónico</label>
+                                            <input type="email" class="form-control" id="{{ register_form.email.id_for_label }}" name="{{ register_form.email.html_name }}">
+                                        </div>
+                                        
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label for="{{ register_form.password1.id_for_label }}">Tu contraseña</label>
+                                            <input type="password" class="form-control" id="{{ register_form.password1.id_for_label }}" name="{{ register_form.password1.html_name }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label for="{{ register_form.password2.id_for_label }}">Repite tu contraseña</label>
+                                            <input type="password" class="form-control" id="{{ register_form.password2.id_for_label }}" name="{{ register_form.password2.html_name }}">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-check d-flex custom-checkbox justify-content-center mb-4">
+                                        {{ register_form.remember_me }}
+                                        <label class="form-check-label ms-2" for="{{ register_form.remember_me.id_for_label }}">
+                                            Recuérdame
+                                        </label>
+                                    </div>
+
+                                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                        <button type="submit" class="btn btn-danger btn-lg">Register</button>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                            <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                                    class="img-fluid" alt="Sample image">
+                                    
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
