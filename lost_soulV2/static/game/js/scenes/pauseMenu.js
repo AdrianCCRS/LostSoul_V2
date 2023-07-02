@@ -1,4 +1,4 @@
-import { pauseMenuComponents } from "../components/pauseMenuComponents.js"
+import { pauseMenuComponents } from "/static/game/js/components/pauseMenuComponents.js"
 export class pauseMenu extends Phaser.Scene{
     constructor(){
         super({key : 'pauseMenu'})
@@ -6,7 +6,7 @@ export class pauseMenu extends Phaser.Scene{
     }
 
     preload(){
-        this.load.image('pm-bg', '../../src/gameAssets/environment/PauseMenu/pause-menu-bg.png')
+        this.load.image('pm-bg', '/static/game/src/gameAssets/environment/PauseMenu/pause-menu-bg.png')
         this.pauseMenuComponentsItems.preload()
     }
 

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block extrahead %}
+<title>Lost Soul</title>
+<style>
+    body {
+        background: #6f1120;
+        background: linear-gradient(to right, #6f1120, #e70027);
+      }
+</style>
+{% endblock extrahead %}
+{% load static %}
+{% block content %}
+<div class="container-fluid px-10 my-5">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-xl-10">
+            <div class="card border-0 rounded-3 shadow-lg overflow-hidden">
+                <div class="card-body p-0">
+                    <div id="juego" class="canvas-container mb-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block extrajs %}
+<script type="module" src="{% static '/game/js/game.js'%}"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const targetDiv = document.getElementById("juego");
+        if (targetDiv) {
+            targetDiv.scrollIntoView({ behavior: "smooth" });
+        }
+    });
+</script>
+{% endblock extrajs %}

@@ -1,4 +1,4 @@
-import { sound } from "./mainMenuComponents.js"
+import { sound } from "/static/game/js/components/mainMenuComponents.js"
 export class pauseMenuComponents{
     constructor(scene){
         this.relatedScene = scene
@@ -12,7 +12,7 @@ export class pauseMenuComponents{
     }
 
     preload(){
-        this.relatedScene.load.spritesheet('selected', '../../src/gameAssets/environment/PauseMenu/components/selected.png', {frameWidth: 68, frameHeight: 87})
+        this.relatedScene.load.spritesheet('selected', '/static/game/src/gameAssets/environment/PauseMenu/components/selected.png', {frameWidth: 68, frameHeight: 87})
         this.pauseTextItem.preload()
         this.homeTextButtonItem.preload()
         this.retryTextButtonItem.preload()
@@ -36,7 +36,7 @@ export class pauseText{
         this.relatedScene = scene
     }
     preload(){
-        this.relatedScene.load.spritesheet('pauseTextSrc', '../../src/gameAssets/environment/PauseMenu/components/pauseText.png',  {frameWidth: 376, frameHeight: 90})
+        this.relatedScene.load.spritesheet('pauseTextSrc', '/static/game/src/gameAssets/environment/PauseMenu/components/pauseText.png',  {frameWidth: 376, frameHeight: 90})
     }
     create(){
         this.pauseTextBtn = this.relatedScene.add.sprite(315, 92, 'pauseTextSrc')
@@ -48,7 +48,7 @@ export class homeTextButton{
         this.relatedScene = scene
     }
     preload(){
-        this.relatedScene.load.spritesheet('homeTextScr', '../../src/gameAssets/environment/PauseMenu/components/homeTextButton.png',  {frameWidth: 163, frameHeight: 48})
+        this.relatedScene.load.spritesheet('homeTextScr', '/static/game/src/gameAssets/environment/PauseMenu/components/homeTextButton.png',  {frameWidth: 163, frameHeight: 48})
     }
     create(){
         this.selectedItem = this.relatedScene.add.sprite(720,243,'selected')
@@ -71,7 +71,7 @@ export class retryTextButton{
         this.relatedScene = scene
     }
     preload(){
-        this.relatedScene.load.spritesheet('retryTextSrc', '../../src/gameAssets/environment/PauseMenu/components/retryTextButton.png',  {frameWidth: 301, frameHeight: 48})
+        this.relatedScene.load.spritesheet('retryTextSrc', '/static/game/src/gameAssets/environment/PauseMenu/components/retryTextButton.png',  {frameWidth: 301, frameHeight: 48})
     }
     create(){
         this.selectedItem = this.relatedScene.add.sprite(720,334,'selected')
@@ -93,7 +93,7 @@ export class backTextButton{
         this.relatedScene = scene
     }
     preload(){
-        this.relatedScene.load.spritesheet('backTextSrc', '../../src/gameAssets/environment/PauseMenu/components/backTextButton.png',  {frameWidth: 181, frameHeight: 49})
+        this.relatedScene.load.spritesheet('backTextSrc', '/static/game/src/gameAssets/environment/PauseMenu/components/backTextButton.png',  {frameWidth: 181, frameHeight: 49})
     }
     create(){
         this.selectedItem = this.relatedScene.add.sprite(720,430,'selected')
@@ -118,7 +118,7 @@ export class timeText{
         this.relatedScene = scene
     }
     preload(){
-        this.relatedScene.load.spritesheet('timeTextSrc', '../../src/gameAssets/environment/PauseMenu/components/timeText.png',  {frameWidth: 233, frameHeight: 63})
+        this.relatedScene.load.spritesheet('timeTextSrc', '/static/game/src/gameAssets/environment/PauseMenu/components/timeText.png',  {frameWidth: 233, frameHeight: 63})
     }
     create(){
         this.timeTextBtn = this.relatedScene.add.sprite(215, 520, 'timeTextSrc')

@@ -31,7 +31,7 @@ export class creditsButton{
         this.relatedScene = scene
     }
     preload(){
-        this.relatedScene.load.spritesheet('creditsButton', '../../src/gameAssets/environment/MainMenu/components/creditsButton.png', {frameWidth: 243, frameHeight: 52})
+        this.relatedScene.load.spritesheet('creditsButton', '/static/game/src/gameAssets/environment/MainMenu/components/creditsButton.png', {frameWidth: 243, frameHeight: 52})
     }
 
     create(){
@@ -57,7 +57,7 @@ export class mMenuPlayer{
     }
 
     preload(){
-        this.relatedScene.load.spritesheet('mmplayer', '../../src/gameAssets/characters/prota-frames-128x128.png', {frameWidth: 128, frameHeight: 128})
+        this.relatedScene.load.spritesheet('mmplayer', '/static/game/src/gameAssets/characters/prota-frames-128x128.png', {frameWidth: 128, frameHeight: 128})
     }
     create(){
         this.mmplayer_0 = this.relatedScene.add.sprite(700,100, 'mmplayer')
@@ -103,7 +103,7 @@ export class playButton{
     }
 
     preload(){
-        this.relatedScene.load.spritesheet('playButton', '../../src/gameAssets/environment/MainMenu/components/playButton.png', {frameWidth: 278, frameHeight: 107})    
+        this.relatedScene.load.spritesheet('playButton', '/static/game/src/gameAssets/environment/MainMenu/components/playButton.png', {frameWidth: 278, frameHeight: 107})    
     }
 
     create(){
@@ -133,7 +133,7 @@ export class sound{
     }
 
     preload(){
-        this.relatedScene.load.spritesheet('sound', '../../src/gameAssets/environment/MainMenu/components/sound.png', {frameWidth: 85, frameHeight: 75})    
+        this.relatedScene.load.spritesheet('sound', '/static/game/src/gameAssets/environment/MainMenu/components/sound.png', {frameWidth: 85, frameHeight: 75})    
     }
 
     create(){
@@ -164,7 +164,7 @@ export class title{
     }
 
     preload(){
-        this.relatedScene.load.spritesheet('title', '../../src/gameAssets/environment/MainMenu/components/titleSprite.png', {frameWidth: 396, frameHeight: 240})
+        this.relatedScene.load.spritesheet('title', '/static/game/src/gameAssets/environment/MainMenu/components/titleSprite.png', {frameWidth: 396, frameHeight: 240})
     }
     create(){
         this.title = this.relatedScene.add.sprite(300,150, 'title')

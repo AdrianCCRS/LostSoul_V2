@@ -1,4 +1,4 @@
-import { mainMenuComponents } from "../components/mainMenuComponents.js"
+import { mainMenuComponents } from "/static/game/js/components/mainMenuComponents.js"
 export class mainMenu extends Phaser.Scene{
     constructor(){
         super({key : 'mainMenu'})

@@ -4,10 +4,10 @@ export class gameover extends Phaser.Scene{
     }
 
     preload(){
-        this.load.image('gameover-bg', '../../src/gameAssets/environment/gameover/gameover-bg.png')
-        this.load.spritesheet('gameover-text', '../../src/gameAssets/environment/gameover/gameover-sprite.png', {frameWidth: 500, frameHeight: 1000})
-        this.load.spritesheet('retry-btn', '../../src/gameAssets/environment/gameover/gameover-retry-btn.png', {frameWidth: 319, frameHeight: 97})
-        this.load.spritesheet('out-btn', '../../src/gameAssets/environment/gameover/gameover-out-btn.png', {frameWidth: 319, frameHeight: 97})
+        this.load.image('gameover-bg', '/static/game/src/gameAssets/environment/gameover/gameover-bg.png')
+        this.load.spritesheet('gameover-text', '/static/game/src/gameAssets/environment/gameover/gameover-sprite.png', {frameWidth: 500, frameHeight: 1000})
+        this.load.spritesheet('retry-btn', '/static/game/src/gameAssets/environment/gameover/gameover-retry-btn.png', {frameWidth: 319, frameHeight: 97})
+        this.load.spritesheet('out-btn', '/static/game/src/gameAssets/environment/gameover/gameover-out-btn.png', {frameWidth: 319, frameHeight: 97})
     }
 
     create(){

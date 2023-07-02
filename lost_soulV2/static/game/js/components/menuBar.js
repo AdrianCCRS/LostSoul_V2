@@ -30,7 +30,7 @@ export class bgMBar{
 
     }
     preload(){
-        this.relatedScene.load.spritesheet('bg-menu-bar', '../../src/gameAssets/environment/MainMenu/components/bg-menu-bar.png', {frameWidth: 250, frameHeight: 94})
+        this.relatedScene.load.spritesheet('bg-menu-bar', '/static/game/src/gameAssets/environment/MainMenu/components/bg-menu-bar.png', {frameWidth: 250, frameHeight: 94})
     }
     create(){
         this.bgMenuBar = this.relatedScene.add.sprite(120,0, 'bg-menu-bar')
@@ -48,7 +48,7 @@ export class homeButton{
     }
 
     preload(){
-        this.relatedScene.load.spritesheet('homeButton', '../../src/gameAssets/environment/MainMenu/components/homeButton.png', {frameWidth: 40, frameHeight: 30})
+        this.relatedScene.load.spritesheet('homeButton', '/static/game/src/gameAssets/environment/MainMenu/components/homeButton.png', {frameWidth: 40, frameHeight: 30})
     }
     create(){
         this.homeButton = this.relatedScene.add.sprite(35,20, 'homeButton').setInteractive()
@@ -76,7 +76,7 @@ export class pauseButton{
     }
 
     preload(){
-        this.relatedScene.load.spritesheet('pauseButton', '../../src/gameAssets/environment/MainMenu/components/pauseButton.png', {frameWidth: 24, frameHeight: 30})
+        this.relatedScene.load.spritesheet('pauseButton', '/static/game/src/gameAssets/environment/MainMenu/components/pauseButton.png', {frameWidth: 24, frameHeight: 30})
     }
     create(){
         this.pauseButton = this.relatedScene.add.sprite(75,20, 'pauseButton').setInteractive()

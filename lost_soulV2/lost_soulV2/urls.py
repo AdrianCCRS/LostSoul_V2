@@ -22,5 +22,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', include('commons.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('', include('lost_soul_game.urls')),
     path('admin/', admin.site.urls),
 ]

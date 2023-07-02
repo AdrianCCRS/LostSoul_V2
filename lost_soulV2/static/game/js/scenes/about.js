@@ -4,8 +4,8 @@ export class about extends Phaser.Scene{
     }
 
     preload(){
-        this.load.spritesheet('back-btn', '../../src/gameAssets/environment/About/about-back-btn.png', {frameWidth : 130, frameHeight: 67})
-        this.load.image('about-bg', '../../src/gameAssets/environment/About/about-bg.png')
+        this.load.spritesheet('back-btn', '/static/game/src/gameAssets/environment/About/about-back-btn.png', {frameWidth : 130, frameHeight: 67})
+        this.load.image('about-bg', '/static/game/src/gameAssets/environment/About/about-bg.png')
     }
 
     create(){

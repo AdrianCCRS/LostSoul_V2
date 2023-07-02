@@ -1,5 +1,5 @@
-import { Player } from "../classes/player.js";
-import { menuBar } from "../components/menuBar.js";
+import { Player } from "/static/game/js/classes/player.js";
+import { menuBar } from "/static/game/js/components/menuBar.js";
 export class worldOne extends Phaser.Scene{
     constructor(){
         super({ key : "worldOne"});
@@ -8,16 +8,16 @@ export class worldOne extends Phaser.Scene{
     preload(){
 
         //Cargando el entorno
-        this.load.spritesheet('wasd', '../../src/gameAssets/environment/MainMenu/components/wasd.png', {frameWidth: 250, frameHeight: 117})
-        this.load.image('map-src', '../../src/gameAssets/environment/map-level1.png')
-        this.load.tilemapTiledJSON('map', '../../src/gameDataSources/mapData.json')
+        this.load.spritesheet('wasd', '/static/game/src/gameAssets/environment/MainMenu/components/wasd.png', {frameWidth: 250, frameHeight: 117})
+        this.load.image('map-src', '/static/game/src/gameAssets/environment/map-level1.png')
+        this.load.tilemapTiledJSON('map', '/static/game/src/gameDataSources/mapData.json')
 
         //Cargando componentes
         this.menuBar = new menuBar(this)
         this.menuBar.preload()
 
         //Cargando el jugador
-        this.prota = new Player(this, 'player-src', '../../src/gameAssets/characters/prota-frames.png','../../src/gameDataSources/characters/prota.json')
+        this.prota = new Player(this, 'player-src', '/static/game/src/gameAssets/characters/prota-frames.png','/static/game/src/gameDataSources/characters/prota.json')
         this.prota.loadKeys()
     }
 
@@ -163,7 +163,7 @@ export class endWorldOne extends Phaser.Scene{
     }
 
     preload(){
-        this.load.video('end-scene', '../../src/gameAssets/environment/WorldOne/end-scene.mp4')
+        this.load.video('end-scene', '/static/game/src/gameAssets/environment/WorldOne/end-scene.mp4')
     }
 
     create(){

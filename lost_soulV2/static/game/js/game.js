@@ -1,10 +1,10 @@
-import {endWorldOne, worldOne} from "./scenes/worldOne.js"
-import {mainMenu} from "./scenes/mainMenu.js"
-import { pauseMenu } from "./scenes/pauseMenu.js"
-import { gameover } from "./scenes/gameover.js"
-import { about } from "./scenes/about.js"
+import {endWorldOne, worldOne} from "/static/game/js/scenes/worldOne.js"
+import {mainMenu} from "/static/game/js/scenes/mainMenu.js"
+import { pauseMenu } from "/static/game/js/scenes/pauseMenu.js"
+import { gameover } from "/static/game/js/scenes/gameover.js"
+import { about } from "/static/game/js/scenes/about.js"
 const config = {
-    //Decide si el navgador usa canvas o webGL
+    //Decide si el navgador usa canvas o webGL adasd
     parent: 'juego',
     type: Phaser.AUTO,
     width: 800,
