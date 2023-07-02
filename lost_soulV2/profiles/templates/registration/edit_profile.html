@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extrahead %}
+<title>Perfil | LostSoul</title>
+<style>
+    .profile-picture-container {
+        max-width: 200px; /* Tamaño máximo del círculo */
+        margin: 0 auto; /* Centra el círculo horizontalmente */
+    }
+    
+    .profile-picture-container img {
+        width: 100%; /* La imagen ocupa el 100% del contenedor */
+        height: 200px; /* La altura se ajusta automáticamente para mantener la proporción */
+    }
+</style>
+{% endblock extrahead %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">Editar perfil</div>
+          <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <button type="submit" class="btn btn-primary mt-3">Guardar cambios</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% block extrajs %}
+<script>
+    // Función para previsualizar la imagen seleccionada
+    document.getElementById("avatar-upload").addEventListener("change", function() {
+        const previewImage = document.getElementById("profile-picture-preview");
+        const inputFile = this;
+        if (inputFile.files && inputFile.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImage.src = e.target.result;
+            };
+            reader.readAsDataURL(inputFile.files[0]);
+        }
+    });
+    
+    // Actualizar el texto del input de texto al seleccionar un archivo
+    document.getElementById("avatar-upload").addEventListener("change", function() {
+        var fileName = this.files[0].name;
+        document.getElementById("avatar-upload-filename").value = fileName;
+    
+        // Previsualizar la imagen seleccionada
+        readURL(this);
+    });
+    </script>
+{% endblock extrajs %}

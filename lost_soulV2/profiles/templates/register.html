@@ -55,7 +55,6 @@
                                             <label for="{{ register_form.email.id_for_label }}">Tu correo electrónico</label>
                                             <input type="email" class="form-control" id="{{ register_form.email.id_for_label }}" name="{{ register_form.email.html_name }}">
                                         </div>
-                                        
                                     </div>
 
                                     <div class="d-flex flex-row align-items-center mb-4">
@@ -84,7 +83,36 @@
                                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                                         <button type="submit" class="btn btn-danger btn-lg">Registrarse</button>
                                     </div>
-
+                                    {% if register_form.errors %}
+                                    <div class="errors">
+                                        <div class="alert alert-danger" role="alert">Hubo algunos errores en el formulario:</div>
+                                        <ul>
+                                            {% for field_name, field_errors in register_form.errors.items %}
+                                                {% if field_name == 'email' %}
+                                                    {% for error in field_errors %}
+                                                        <li>Error en el campo "Correo Electrónico": {{ error }}</li>
+                                                    {% endfor %}
+                                                {% elif field_name == 'username' %}
+                                                    {% for error in field_errors %}
+                                                        <li>Error en el campo "Nombre de Usuario": {{ error }}</li>
+                                                    {% endfor %}
+                                                {% elif field_name == 'password1' %}
+                                                    {% for error in field_errors %}
+                                                        <li>Error en el campo "Contraseña": {{ error }}</li>
+                                                    {% endfor %}
+                                                {% elif field_name == 'password2' %}
+                                                    {% for error in field_errors %}
+                                                        <li>Error en el campo "Confirmar contraseña": {{ error }}</li>
+                                                    {% endfor %}
+                                                {% else %}
+                                                {% for error in field_errors %}
+                                                <li>Error en el campo "{{ field_name }}": {{ error }}</li>
+                                                {% endfor %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                {% endif %}
                                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                                         <p>¿Ya tienes una cuenta? <a href="{% url 'login' %}">Inicia sesión</a></p>
                                     </div>
