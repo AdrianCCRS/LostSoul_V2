@@ -8,6 +8,29 @@
       }
 
       .link-muted { color: #aaa; } .link-muted:hover { color: #1266f1; }
+
+      .pink-textarea textarea.md-textarea:focus:not([readonly]) {
+        border-bottom: 1px solid #f48fb1;
+        box-shadow: 0 1px 0 0 #f48fb1;
+      }
+      .active-pink-textarea.md-form label.active {
+        color: #f48fb1;
+      }
+      .active-pink-textarea.md-form textarea.md-textarea:focus:not([readonly])+label {
+        color: #f48fb1;
+      }
+      .comment_break p {
+        word-wrap: break-word;
+      }
+      .form-control-mod {
+        height: auto;
+        max-height: 200px; /* Establece aquí el valor que desees */
+        resize: vertical; /* Permite redimensionar verticalmente el textarea */
+      }
+
+      .lg-comment{
+        width: 100%;
+      }
 </style>
 {% endblock extrahead %}
 {% load static %}
@@ -25,8 +48,91 @@
     </div>
 </div>
 
+<!--Añadir comentario-->
+
+<!--Fin añadir comentario-->
 <section>
-    <div class="container my-5 py-5">
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+      <div class="col-xl-9 mb-3">
+          <div class="card bg bg-dark text-light mb-2">
+            <div class="card-body p-4">
+              <h4 class="mb-0">Añadir comentario</h4>
+              <p class="fw-light mb-4 pb-2">¿Qué opinas?</p>
+              <div class="d-flex flex-start">
+                {% if user.profile.avatar %}
+                <img class="rounded-circle shadow-1-strong me-3"
+                  src="{{user.profile.avatar.url}}" alt="avatar" width="60"
+                  height="60" />
+                {% else %}
+                <img class="rounded-circle shadow-1-strong me-3"
+                  src="{% static '/img/non-profile.png'%}" alt="avatar" width="60"
+                  height="60" />
+                {% endif %}
+                <div class="lg-comment">
+                  <h6 class="fw-bold mb-1">{{user.profile.public_username}}</h6>
+                  <form action="{% url 'game'%}" method="post"> 
+                    {% csrf_token %} 
+                  <div class="comment-area">                             
+                    <textarea class="form-control lg-comment my-3" id="{{comment_form.body.id_for_label}}" name="{{comment_form.body.html_name}}" placeholder="Creo que LostSoul es..." rows="4"></textarea>
+                    <button type="submit"  class="btn btn-danger d-flex justify-content-end">Enviar</button>
+                </div>
+                {% if form.errors %}
+                <div class="errors">
+                    <div class="alert alert-danger" role="alert">Hubo algunos errores en el formulario:</div>
+                    <ul>
+                        {% for field_name, field_errors in form.errors.items %}
+                            {% if field_name == 'email' %}
+                                {% for error in field_errors %}
+                                    <li> {{ error }}</li>
+                                {% endfor %}
+                            {% elif field_name == 'username' %}
+                                {% for error in field_errors %}
+                                    <li> {{ error }}</li>
+                                {% endfor %}
+                            {% elif field_name == 'password1' %}
+                                {% for error in field_errors %}
+                                    <li> {{ error }}</li>
+                                {% endfor %}
+                            {% elif field_name == 'password2' %}
+                                {% for error in field_errors %}
+                                    <li> {{ error }}</li>
+                                {% endfor %}
+                            {% else %}
+                            {% for error in field_errors %}
+                                                <li>Error en el campo "{{ field_name }}": {{ error }}</li>
+                                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}   
+            
+            {% if messages %}
+                    {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                            <div class="alert alert-danger" role="alert">{{ message }}</div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}  
+
+              </form>
+              </div>
+            </div>               
+                </div>
+                
+
+            <hr class="my-0" />
+
+          </div>  
+      </div>
+    </div>
+  </div>
+  </div>
+  </section>
+
+<section>
+    <div class="container">
       <div class="row d-flex justify-content-center">
         <div class="col-xl-11">
 {% for comment in comments_list %}
@@ -50,7 +156,7 @@
                 </a>
                 <div>
                   <h6 class="fw-bold mb-1">{{comment.comment_author.public_username}}</h6>
-                  <div class="d-flex align-items-center mb-3">
+                  <div class="d-flex align-items-center mb-3 comment_break">
                     <p class="mb-0">
                       {{comment.date_added}}
                     </p>
@@ -59,9 +165,17 @@
                   <p class="mb-0">
                     {{comment.body}}
                   </p>
+                  {% if request.user.profile == comment.comment_author %}
+            <form method="POST" action="{% url 'delete_comment' comment.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger my-3">Eliminar comentario</button>
+            </form>
+            {% endif %}
                 </div>
               </div>
             </div>
+
+            
   
             <hr class="my-0" />
 
