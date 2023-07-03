@@ -85,7 +85,7 @@
                                     </div>
                                     {% if register_form.errors %}
                                     <div class="errors">
-                                        <div class="alert alert-danger" role="alert">Hubo algunos errores en el formulario:</div>
+                                        <div class="alert alert-danger" role="alert" >Hubo algunos errores en el formulario:</div>
                                         <ul>
                                             {% for field_name, field_errors in register_form.errors.items %}
                                                 {% if field_name == 'email' %}

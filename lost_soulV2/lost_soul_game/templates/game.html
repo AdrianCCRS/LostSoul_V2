@@ -10,6 +10,7 @@
 {% endblock extrahead %}
 {% load static %}
 {% block content %}
+{% if user.is_authenticated %}
 <div class="container-fluid px-10 my-5">
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col-xl-10">
@@ -21,8 +22,33 @@
         </div>
     </div>
 </div>
+{% else %}
+<div class="container-fluid px-10 my-5">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-xl-10">
+            <div class="card border-0 rounded-3 shadow-lg overflow-hidden">
+                <div class="card-body p-0">
+                    <div class="canvas-container mb-4">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <div class="alert alert-danger" role="alert">
+                                <h4 class="alert-heading">¡Debes iniciar sesión!</h4>
+                                <p>Para poder jugar debes iniciar sesión, si no tienes una cuenta puedes registrarte
+                                    <a href="{% url 'registro' %}">aquí</a>.</p>
+                                <hr>
+                                <p class="mb-0">Si ya tienes una cuenta puedes iniciar sesión
+                                    <a href="{% url 'login' %}">aquí</a>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
 {% endblock content %}
 {% block extrajs %}
+{% if user.is_authenticated %}
 <script type="module" src="{% static '/game/js/game.js'%}"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -32,4 +58,5 @@
         }
     });
 </script>
+{% endif %}
 {% endblock extrajs %}

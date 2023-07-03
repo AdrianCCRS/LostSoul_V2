@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from .models import Profile
+
 class NewUserForm(UserCreationForm):
     email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'class': 'form-control'}))
     remember_me = forms.BooleanField(
@@ -38,4 +39,6 @@ class PasswordChangingForm(PasswordChangeForm):
         model = User
         fields = ("old_password", 'new_password1', 'new_password2')
 		
+
+    
 

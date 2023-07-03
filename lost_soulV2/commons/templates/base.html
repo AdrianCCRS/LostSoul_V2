@@ -63,15 +63,42 @@
           <a class="nav-link nav-link-mod" href="{% url 'admin:index' %}">Administración del sitio</a>
         </li>
         {% endif %}
-      </ul>
-      <!-- Left links -->
-    </div>
-    <!-- Collapsible wrapper -->
+
+        <div class="d-block d-lg-none">
+
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link nav-link-mod" href="{% url 'show_profile_page' user.profile.id%}">Perfil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-mod" href="{% url 'edit_profile_page' user.profile.id%}">Editar perfil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-mod" href="{% url 'edit_profile'%}">Configuración</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-mod" href="{%url 'logout' %}">Cerrar sesión</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link nav-link-mod" href="{% url 'login' %}">Iniciar sesión</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-mod" href="{%url 'registro'%}">Registrarse</a>
+          </li>
+          {% endif %}
+
+        </div>
+
+        </ul>
+        <!-- Left links -->
+      </div>
+      <!-- Collapsible wrapper -->
 
     <!-- Right elements -->
     <div class="d-flex align-items-center">
       <!-- Avatar -->
-      <div class="dropdown">
+      <div class="dropdown d-none d-lg-block">
         <a
           class="nav-link dropdown-toggle nav-link-mod" href="#" role="button" 
           data-bs-toggle="dropdown"
@@ -79,12 +106,31 @@
           id="navbarDropdownMenuAvatar"
           role="button"
           aria-expanded="false">
+          {% if user.is_authenticated %}
+          {% if user.profile.avatar %}
           <img
-            src="{% static 'img/non-profile.png'%}"
-            class="rounded-circle"
-            height="45"
-            alt="Perfil defecto"
+          src="{{ user.profile.avatar.url }}"
+          class="rounded-circle"
+          height="45"
+          alt="Perfil defecto"
+          style="width:60px; height:60px;"
           />
+          {% else %}
+          <img
+          src="{% static '/img/non-profile.png' %}"
+          class="rounded-circle"
+          height="45"
+          alt="Perfil defecto"
+          />
+          {% endif %}
+          {% else %}
+          <img
+          src="{% static '/img/non-profile.png' %}"
+          class="rounded-circle"
+          height="45"
+          alt="Perfil defecto"
+          />
+          {% endif %}
         </a>
         <ul
           class="dropdown-menu dropdown-menu-end"
@@ -93,10 +139,13 @@
         
         {% if user.is_authenticated %}
           <li>
-            <a class="dropdown-item" href="{% url 'edit_profile'%}">Perfil</a>
+            <a class="dropdown-item" href="{% url 'show_profile_page' user.profile.id%}">Perfil</a>
           </li>
           <li>
-            <a class="dropdown-item" href="#">Configuración</a>
+            <a class="dropdown-item" href="{% url 'edit_profile_page' user.profile.id%}">Editar perfil</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="{% url 'edit_profile'%}">Configuración</a>
           </li>
           <li>
             <a class="dropdown-item" href="{%url 'logout' %}">Cerrar sesión</a>

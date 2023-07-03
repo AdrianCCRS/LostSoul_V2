@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extrahead %}
+<title>Perfil | LostSoul</title>
+<style>
+  .profileimg {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .bg-black {
+    background: #000;
+  }
+  
+  .skill-block {
+    width: 30%;
+  }
+  
+  @media (min-width: 991px) and (max-width:1200px) {
+    .skill-block {
+      padding: 32px !important;
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .skill-block {
+      padding: 56px !important;
+    }
+  }
+  
+  body {
+    background-color: #eeeeee;
+  }
+</style>
+{% endblock extrahead %}
+{% block content %}
+<div class="container mt-5 mb-5">
+  <div class="row no-gutters">
+    {% if page_user.avatar %}
+          <div class="col-md-4 col-lg-4"><img class="profileimg" src="{{page_user.avatar.url}}" alt="Foto de perfil"></div>
+          {% else %}
+          <div class="col-md-4 col-lg-4 profileimg"><img class="profileimg" src="{% static '/img/non-profile.png'%}" alt="Foto de perfil"></div>
+      {% endif %}
+      
+      <div class="col-md-8 col-lg-8">
+          <div class="d-flex flex-column">
+              <div class="d-flex flex-row justify-content-between align-items-center p-5 bg-dark text-white">
+                  <h3 class="display-5">{{page_user.public_username}}</h3><i class="fa fa-facebook"></i><i class="fa fa-google"></i><i class="fa fa-youtube-play"></i><i class="fa fa-dribbble"></i><i class="fa fa-linkedin"></i></div>
+              <div class="p-3 bg-black text-white">
+                  <h6>{{page_user.bio}}</h6>
+              </div>
+              <div class="d-flex flex-row text-white">
+                  <div class="p-4 text-center skill-block" style="background-color:#db2638">
+                      <h4>FR1</h4>
+                  </div>
+                  <div class="p-3 text-center skill-block" style="background-color:#e6192d">
+                      <h4>FR2</h4>
+                  </div>
+                  <div class="p-3 text-center skill-block" style="background-color:#be0013">
+                      <h4>FR3</h4>
+                  </div>
+                  <div class="p-3 text-center skill-block" style="background-color:#8a000e">
+                      <h4>SCORE</h4>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+{% endblock content %}
