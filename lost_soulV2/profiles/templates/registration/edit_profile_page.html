@@ -130,7 +130,7 @@
   </div>
   </section>
 {% else %}
-<div class="alert alert-danger"> No deberías estar aquí, si gustas, <a href="{% url 'edit_profile_page' user.profile.id}">edita</a> tu propio perfil</div>
+<div class="alert alert-danger"> No deberías estar aquí, si gustas, <a href="{% url 'edit_profile_page' user.profile.id}"> edita </a> tu propio perfil</div>
 {% endif %}
 {% else %}
 <div class="alert alert-danger"> No deberías estar aquí, si gustas, <a href="{% url 'login'%}">loguéate</a> para editar tu perfil</div>

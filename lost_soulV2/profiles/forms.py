@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from .models import Profile
+from django.db import models
 
 class NewUserForm(UserCreationForm):
     email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'class': 'form-control'}))
@@ -38,6 +39,12 @@ class PasswordChangingForm(PasswordChangeForm):
     class Meta:
         model = User
         fields = ("old_password", 'new_password1', 'new_password2')
+
+class CreateProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ["public_username", "avatar"]
+        user = models.OneToOneField(User, on_delete=models.CASCADE)
 		
 
     

@@ -12,7 +12,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.template import loader
 from django.contrib.auth import login
 
-from .forms import EditProfileForm, NewUserForm, PasswordChangingForm
+from .forms import EditProfileForm, NewUserForm, PasswordChangingForm, CreateProfileForm
 from django.contrib.auth.decorators import user_passes_test
 
 @method_decorator(login_required, name='dispatch')
@@ -45,16 +45,21 @@ def is_user_not_authenticated(user):
 def registro(request):
     if request.method == "POST":
         form = NewUserForm(request.POST)
-        if form.is_valid():
+        form_profle = CreateProfileForm(request.POST, request.FILES)
+
+        if form.is_valid() and form_profle.is_valid():
             user = form.save()
+            form_profle.instance.user = user
+            form_profle.save()
             login(request,user)
             messages.success(request, "Registro Exitoso")
             return redirect('index')
         else:
-            return render(request, 'register.html', {'register_form': form})
+            return render(request, 'register.html', {'register_form': form, 'form_profile': form_profle})
     else:
         form = NewUserForm()
-        context = {"register_form":form}
+        form_profle = CreateProfileForm()
+        context = {"register_form":form, "form_profile":form_profle}
         template = loader.get_template("register.html")
         return HttpResponse(template.render(context,request))
 

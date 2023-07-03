@@ -23,15 +23,16 @@
 </style>
 {% endblock extrahead %}
 {% block content %}
+
     <section>
         <div class="container h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-md">
+            <div class="col-md-12 col-lg-10 col-xl-8">
                 <div class="card text-black" style="border-radius: 25px;">
                     <div class="card-body p-md-5">
                         <div class="row justify-content-center">
-                            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Registro de nuevo usuario</p>
+                            <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Registro de nuevo usuario</p>
+                            <div class="col-md-12 col-lg-10 col-xl-8">
                                 {% if messages %}
                                     {% for message in messages %}
                                         {% if message.tags == 'error' %}
@@ -39,13 +40,21 @@
                                         {% endif %}
                                     {% endfor %}
                                 {% endif %}                            
-                                <form action="{% url 'registro'%}"class="mx-1 mx-md-4" method="post">
+                                <form action="{% url 'registro'%}"class="mx-1 mx-md-4" method="post" enctype="multipart/form-data">
                                     {% csrf_token %}
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <label for="{{ register_form.username.id_for_label }}">Tu username</label>
+                                            <label for="{{ register_form.username.id_for_label }}">Tu nombre de usuario privado</label>
                                             <input type="text" class="form-control" id="{{ register_form.username.id_for_label }}" name="{{ register_form.username.html_name }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label for="{{ form_profile.public_username.id_for_label }}">Tu nombre de usuario público</label>
+                                            <input type="text" class="form-control" id="{{ form_profile.public_username.id_for_label }}" name="{{ form_profile.public_username.html_name }}">
                                         </div>
                                     </div>
 
@@ -73,13 +82,34 @@
                                         </div>
                                     </div>
                                     
+                                     <!-- Profile picture image-->
+                                    <div class="d-flex justify-content-center mb-4">
+                                        <div class="profile-picture-container">
+
+                                            <img class="img-account-profile rounded-circle mb-2" id="profile-picture-preview" src="{% static '/img/non-profile.png'%}" alt="Foto de perfil" style=" width: 200px; height: 200px;">
+                                        </div>    
+                                    </div>       
+                                    <div class="d-flex flex-column align-items-center mb-4">
+                                        <div class="small font-italic text-muted mb-2">Escoge una foto de perfil <br></div>         
+                                        <div class="small font-italic text-muted mb-4">JPG or PNG no superior a 5 MB</div>
+                                    </div> 
+                                    <div class="d-flex justify-content-center mb-4">         
+                                            <!-- Profile picture upload button-->
+                                                <div class="form-group">
+                                                    <label for="{{form_profile.avatar.id_for_label}}" class="btn btn-danger d-flex justify-content-center">Seleccionar archivo</label>
+                                                    <input class="img-account-profile rounded-circle mb-2" id="{{form_profile.avatar.id_for_label}}" name="{{form_profile.avatar.html_name}}" type="file" style="display: none; width: 200px; height: 200px;">
+                                                    <input id="avatar-upload-filename" type="text" class="form-control mt-2" readonly>
+                                                </div>
+                                        </div>
+                                    </div>    
+
                                     <div class="form-check d-flex custom-checkbox justify-content-center mb-4">
                                         {{ register_form.remember_me }}
                                         <label class="form-check-label ms-2" for="{{ register_form.remember_me.id_for_label }}">
                                             Recuérdame
                                         </label>
                                     </div>
-
+                                    
                                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                                         <button type="submit" class="btn btn-danger btn-lg">Registrarse</button>
                                     </div>
@@ -110,7 +140,24 @@
                                                 {% endfor %}
                                                 {% endif %}
                                             {% endfor %}
-                                        </ul>
+
+                                            {% if form_profile.errors %}
+                                            {% for field_name, field_errors in form_profile.errors.items %}
+                                                {% if field_name == 'public_username' %}
+                                                    {% for error in field_errors %}
+                                                        <li>Error en el campo "Nombre de usuario público": {{ error }}</li>
+                                                    {% endfor %}
+                                                {% elif field_name == 'username' %}
+                                                    {% for error in field_errors %}
+                                                        <li>Error en el campo "Imagen de perfil": {{ error }}</li>
+                                                    {% endfor %}
+                                                {% else %}
+                                                {% for error in field_errors %}
+                                                <li>Error en el campo "{{ field_name }}": {{ error }}</li>
+                                                {% endfor %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}   
                                     </div>
                                 {% endif %}
                                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
@@ -118,14 +165,7 @@
                                     </div>
 
                                 </form>
-
                             </div>
-                            <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
-                                    class="img-fluid" alt="Sample image">
-                                    
-                                </div>
                             </div>
                     </div>
                 </div>
@@ -134,3 +174,35 @@
     </div>
 </section>
 {% endblock content %}
+{% block extrajs %}
+<script>
+    // Función para previsualizar la imagen seleccionada
+    document.getElementById("{{form_profile.avatar.id_for_label}}").addEventListener("change", function() {
+        const previewImage = document.getElementById("profile-picture-preview");
+        const inputFile = this;
+        if (inputFile.files && inputFile.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImage.src = e.target.result;
+            };
+            reader.readAsDataURL(inputFile.files[0]);
+        }
+    });
+    
+    // Actualizar el texto del input de texto al seleccionar un archivo
+    document.getElementById("{{form_profile.avatar.id_for_label}}").addEventListener("change", function() {
+        var fileName = this.files[0].name;
+        document.getElementById("avatar-upload-filename").value = 'Estás subiendo: ' + fileName;
+    
+        // Previsualizar la imagen seleccionada
+        readURL(this);
+    });
+    </script>
+{% endblock extrajs%}
+<!--
+    <form method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    {{ form_profile.as_p }}
+                                    <button type="submit">Guardar</button>
+                                </form>
+-->
