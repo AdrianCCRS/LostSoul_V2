@@ -4,43 +4,120 @@
 <title>Inicio | LostSoul</title>
 {% endblock extrahead %}
 {% block content %}
-<div class="container container-mod main-page-items">
-    <div class="container  mainP-item">
-      <h1 class="text-center">Lost Soul, encuentra tu camino</h1>
+<div class="container">
+
+  <h1 class="text-center">Lost Soul, encuentra tu camino</h1>
+
+    <div class="row justify-content-center my-5">
+      <div class="col-md-10">
+        <h2 class="text-center"> Descripcion del juego</h2>
+          <div class="d-flex flex-column align-items-center" >
+            <p class="text-justify">Lost Soul es un juego tipo <i>"platform"</i> cuyo objetivo es no caerse, como su género lo indica, de las plataformas. Sigue la historia del protagonista
+              cuyo objetivo es encontrar su camino de redención, pues carga con sigo un peso demasiado grande. Y es que sí, tal como lo indica su particular aspecto, nuestro querido amigo
+              ya pasó a mejor vida, pero no puede hallar el descanso debido a que ha quedado en deuda. ¿Con quién? Con el mismísimo diablo. ¿Cómo? Pues, el diablo le ha ofrecido una segunda oportunidad para redimirse
+              y volver con su familia, la cual se ha ido por su culpa. ¿Qué debe hacer? Pues, debe encontrar su camino y aprobar todas las pruebas que le sean impuestas. ¿Qué pasará si no lo hace? Pues, eso es algo
+              que no podemos afirmar con seguridad, pero no debe ser nada bueno. ¿Qué pasará si lo logra? podrá volver a ver a su familia y descansar en paz. ¿Qué esperas para ayudarlo? ¡Vamos!
+            </p>
+            <figure class="figure">
+              <div class="container col-6">
+                <img class="img-fluid"src="{% static '/img/main-menu-picture.png'%}" class="rounded mx-auto d-block" alt="Captura de pantalla del menú principal del juego">
+                <figcaption class="figure-caption text-muted text-center"> Captura de la pantalla principal del juego</figcaption>
+              </div>
+            </figure>
+        </div>
+      </div>
     </div>
-      <div class="container mainP-item" style="padding-left: 10%; padding-right: 10%;text-align: justify;">
-          <p>Lost Soul es un juego tipo <i>"platform"</i> cuyo objetivo es no caerse, como su género lo indica, de las plataformas. Sigue la historia del protagonista
-          cuyo objetivo es encontrar su camino de redención, pues carga con sigo un peso demasiado grande. Y es que sí, tal como lo indica su particular aspecto, nuestro querido amigo
-          ya pasó a mejor vida, pero no puede hallar el descanso debido a que ha quedado en deuda. ¿Con quién? Con el mismísimo diablo. ¿Cómo? Pues, el diablo le ha ofrecido una segunda oportunidad para redimirse
-          y volver con su familia, la cual se ha ido por su culpa. ¿Qué debe hacer? Pues, debe encontrar su camino y aprobar todas las pruebas que le sean impuestas. ¿Qué pasará si no lo hace? Pues, eso es algo
-          que no podemos afirmar con seguridad, pero no debe ser nada bueno. ¿Qué pasará si lo logra? podrá volver a ver a su familia y descansar en paz. ¿Qué esperas para ayudarlo? ¡Vamos!
-        </p>
+
+    <div class="row justify-content-center my-5">
+      <div class="col-md-10">
+        <h2 class="text-center"> Proceso de desarrollo</h2>
+          <div class="d-flex flex-column" >
+
+              <p>Lost Soul es un juego desarrollado en una librería para JavaScript llamada <a href="https://github.com/photonstorm/phaser">Phaser</a>. Este juego fue desarrollado por Yeison Adrian Cáceres Torres, quien se encargó de
+                diseñar, programar y modelar el juego. Este juego fue desarrollado como un proyecto de la materia <i>"Programación en la web"</i> de la Universidad Industrial de Santander. <br><br>
+                Gran parte del material de desarrollo del juego fue diseñado también por Yeison Cáceres con herramientas como Tiled, Photoshop, Canva, entre otras. Aunque otra parte fue tomada de <a href="https://itch.io">Itch.io</a> la cual 
+                es una página web donde desarrolladores pueden subir su material de manera paga o gratuita para el uso de otros, a continuación se da crédito al autor de los recursos tomados de esta página:
+              </p>  
+              <ul class="text-left">
+                <li><a href="https://anokolisa.itch.io/moon-graveyard">Moon Graveyard</a> y  <a href="https://anokolisa.itch.io/sidescroller-pixelart-sprites-asset-pack-forest-16x16">Legacy Fantasy</a> by: <a href="https://anokolisa.itch.io">Anokolisa</a> </li>
+              </ul>
+
+              <figure class="figure">
+                <div class="container col-6">
+                  <img class="img-fluid" src="{% static '/img/phaser-logo.png'%}" class="rounded mx-auto d-block" alt="Logo de Phaser">
+                  <figcaption class="figure-caption text-muted text-center"> Logo de Phaser</figcaption>
+                </div>
+              </figure>
+
+              <p>
+                El proceso de aprendizaje para poder hacer el juego fue de aproximadamente tres semanas; se utilizó la documentación de Phaser y tutoriales de YouTube para poder aprender a utilizar la librería. <br>
+                Básicamente se trabaja con escenas, las cuales se modulan como clases y deben contar con tres métodos fundamentales:
+              </p>
+              <ul>
+                <li><b class="text-danger">preload():</b> </li>
+                <p>En este método se cargan todos los recursos que se van a utilizar en la escena, como imágenes, sprites, música, etc. </p>
+                <li><b class="text-danger">create():</b> </li>
+                <p>En este método se crean todos los objetos que se van a utilizar en la escena, como los personajes, plataformas, etc. </p>
+                <li><b class="text-danger">update():</b> </li>
+                <p>En este método se actualiza la escena, se hacen las respectivas verificaciones de colisiones, movimientos, etc. </p>
+              </ul>
+
+              <p>
+                El juego cuenta con varias escenas, las cuales son:
+                <ul>
+                  <li>El menú principal</li>
+                  <li>El mundo uno (el único que hubo tiempo de desarrollar)</li>
+                  <li>Menú de pausa</li>
+                  <li>Sección de créditos e información del juego</li>
+                  <li>Pantalla de <i>gameover</i> </li>
+                </ul>
+                Además se crea una clase Jugador para crear a nuestro personaje principal, la cual cuenta con los métodos necesarios para su movimiento, salto, etc.
+              </p>
+
+              <p> Aún faltan cosas por mejorar, como la creación de <i>mobs</i> (enemigos) para agregarle dificultad al juego, creación de más mundos, sonidos, un mejoramiento de las colisiones (actualmente son muy imprecisas); sin embargo, esas mejoras se estarán añadiendo en futuras actualizaciones</p>
+        </div>
       </div>
-      <div class="container mainP-item-img">
-        <img class="img-fluid"src="{% static '/img/main-menu-picture.png'%}" class="rounded mx-auto d-block" alt="Captura de pantalla del menú principal del juego">
+    </div>
+
+    <div class="row justify-content-center my-5">
+      <div class="col-md-10">
+        <h2 class="text-center"> Proceso de montaje</h2>
+          <div class="d-flex flex-column" >
+            <p>
+            Ýa tenía el jeugo desarrollado, pero ¿cómo lo iba a montar en la web? Pues, para ello se utilizó la herramienta <a href="https://www.python.org/" >Python</a> y el framework <a href="https://www.djangoproject.com/">Django</a>. Y así poder manejar un sitio para montar el juego y además poder publicar información sobre el mismo como actualizaciones y otras cosas. <br><br>
+            Además de eso, también el sitio cuenta con un sistema de registro y login para que los usuarios puedan guardar su <i>puntaje</i> del juego y así poder competir con otros usuarios, ya que el sitio tiene una sección de comunidad donde se exponen los 10 jugadores con mejores puntajes, y algunas opiniones de los usuarios. <br>
+            El usuario puede registrarse con su correo electrónico, un  nombre de usuario privado y uno público que será el que se muestre en la sección de comunidad y en su página de perfil. El sitio web cuenta con un diseño responsivo, por lo que se puede acceder desde cualquier dispositivo, ya sea un celular, una tablet o un computador, aunque no se recomienda porque el juego si solo funciona para computadores, y no está optimizado para ello <br><br>
+            Todo esto fue un arduo trabajo, pues había que pasar información del juego al framework, aunque al final no resultó siendo muy difícil, solo se debía utilizar <i>fetch</i> <br>
+            </p>
+
+            <p>
+            La estructura de apps del sitio es la siguiente:
+            <ul>
+              <li>
+                <b>Commmons:</b> se encarga de las páginas comunes del sitio, como el index, la página de contacto, la página de comunidad, etc.
+              </li>
+              <li>
+                <b>Juego:</b> se encarga de toda la parte del juego, el puntaje, los comentarios, etc.
+              </li>
+              <li>
+                <b>Perfiles</b> se encarga de toda la parte del usuario, el registro, el login, el perfil, etc.
+              </li>
+            </ul>
+            <ul>
+              <li>
+                <b>Extras: </b> archivos estáticos (imágenes, el juego, y otros recursos estáticos)</li>
+              </li>
+            </ul>
+          </p>
+
+          <p>
+            Para más información sobre el juego, puede dirigirse al repositorio del proyecto en GitHub: <a href="https://github.com/YeisonCcrs/LostSoul_V2">LostSoul_V2</a>
+          </p>
+          </div>
+        </div>
       </div>
-      <div class="container mainP-item">
-        <h1 class="text-center">Proceso de desarrollo</h1>
-      </div>
-      <div class="container mainP-item-img">
-        <img class="img-fluid" src="{% static '/img/phaser-logo.png'%}" class="rounded mx-auto d-block" alt="Logo de Phaser">
-      </div>
-      <div class="container mainP-item" style="padding-left: 10%; padding-right: 10%;text-align: justify;">
-        <p>Lost Soul es un juego desarrollado en una librería para JavaScript llamada <a href="https://github.com/photonstorm/phaser">Phaser</a>. Este juego fue desarrollado por Yeison Adrian Cáceres Torres, quien se encargó de
-          diseñar, programar y modelar el juego. Este juego fue desarrollado como un proyecto de la materia de <i>"Programación en la web"</i> de la Universidad Industrial de Santander
-          Grand parte del material de desarrollo del juego fue diseñado también por Yeison Cáceres con herramientas como Tiled, Photoshop, Canva, entre otras. Aunque otra parte fue tomada de <a href="https://itch.io">Itch.io</a> la cual 
-          es una página de web donde desarrolladores pueden subir su material de manera paga o gratuita para el uso de otros, a continuación se da crédito a los autores de los recursos tomados de esta página:
-          <ul>
-            <li><a href="https://anokolisa.itch.io/moon-graveyard">Moon Graveyard</a> by: <a href="https://anokolisa.itch.io">Anokolisa</a> </li>
-          </ul> 
-        </p>
-      </div>
-      <div class="container mainP-item" style="padding-left: 10%; padding-right: 10%;text-align: justify;">
-          <br>
-          <br>
-          <br>
-          Para más información, visita el repositorio del proyecto en GitHub:
-          <br>
-      </div>
-  </div>
+
+
+
+</div>
 {% endblock content %}

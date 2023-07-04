@@ -23,20 +23,6 @@
     margin-bottom: 0 !important ; 
 }
 
-.main-page-items{
-    display: flex;
-    flex-wrap: wrap;
-    
-}
-
-.mainP-item{
-    flex: 0 0 1;
-    margin: 1%;
-}
-.mainP-item-img{
-    max-width: max-content;
-}
-
 a{
     color: #db2638;
     text-decoration: none;

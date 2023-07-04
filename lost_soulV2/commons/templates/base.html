@@ -48,14 +48,14 @@
         <li class="nav-item">
           <a class="nav-link nav-link-mod" href="{% url 'game' %}">¡Juega ahora!</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link nav-link-mod" href="{% url 'community' %}">Comunidad</a>
-        </li>
         {% else %}
         <li class="nav-item">
           <a class="nav-link nav-link-mod" href="{% url 'registro'%}">¡Regístrate!</a>
         </li>
         {% endif %}
+        <li class="nav-item">
+          <a class="nav-link nav-link-mod" href="{% url 'community' %}">Comunidad</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link nav-link-mod" href="{% url 'contact' %}">Contacto</a>
         </li>
@@ -182,9 +182,8 @@
     <ul class="nav col-md-4 justify-content-end">
       {% if not user.is_authenticated %}
       <li class="nav-item"><a href="{% url 'registro'%}" class="nav-link nav-link-mod text-body-secondary">Registrarse</a></li>  
-      {% else %}
-      <li class="nav-item"><a href="{% url 'community' %}" class="nav-link nav-link-mod text-body-secondary">Comunidad</a></li>
       {% endif %}
+      <li class="nav-item"><a href="{% url 'community' %}" class="nav-link nav-link-mod text-body-secondary">Comunidad</a></li>
       <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link nav-link-mod text-body-secondary">Contacto</a></li>
     </ul>
   </footer>

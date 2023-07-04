@@ -119,62 +119,64 @@ body {
       </div>
     </div>
   </section>
-
+  
+  {% if user.is_authenticated %}
   <section>
     <div class="container">
       <div class="row d-flex justify-content-center">
         <div class="col-xl-9 mb-3">
-            <div class="card bg bg-dark text-light mb-2">
-              <div class="card-body p-4">
-                <h4 class="mb-0">Añadir comentario</h4>
-                <p class="fw-light mb-4 pb-2">¿Qué opinas?</p>
-                <div class="d-flex flex-start">
-                  {% if user.profile.avatar %}
-                  <img class="rounded-circle shadow-1-strong me-3"
-                    src="{{user.profile.avatar.url}}" alt="avatar" width="60"
-                    height="60" />
-                  {% else %}
-                  <img class="rounded-circle shadow-1-strong me-3"
-                    src="{% static '/img/non-profile.png'%}" alt="avatar" width="60"
-                    height="60" />
-                  {% endif %}
-                  <div class="lg-comment">
-                    <h6 class="fw-bold mb-1">{{user.profile.public_username}}</h6>
-                    <form action="{% url 'community'%}" method="post"> 
-                      {% csrf_token %} 
+          <div class="card bg bg-dark text-light mb-2">
+            <div class="card-body p-4">
+              <h4 class="mb-0">Añadir comentario</h4>
+              <p class="fw-light mb-4 pb-2">¿Qué opinas?</p>
+              <div class="d-flex flex-start">
+                {% if user.profile.avatar %}
+                <img class="rounded-circle shadow-1-strong me-3"
+                src="{{user.profile.avatar.url}}" alt="avatar" width="60"
+                height="60" />
+                {% else %}
+                <img class="rounded-circle shadow-1-strong me-3"
+                src="{% static '/img/non-profile.png'%}" alt="avatar" width="60"
+                height="60" />
+                {% endif %}
+                <div class="lg-comment">
+                  <h6 class="fw-bold mb-1">{{user.profile.public_username}}</h6>
+                  <form action="{% url 'community'%}" method="post"> 
+                    {% csrf_token %} 
                     <div class="comment-area">                             
                       <textarea class="form-control lg-comment my-3" id="{{comment_form.body.id_for_label}}" name="{{comment_form.body.html_name}}" placeholder="Creo que LostSoul es..." rows="4"></textarea>
                       <button type="submit"  class="btn btn-danger d-flex justify-content-end">Enviar</button>
-                  </div>
-                  {% if form.errors %}
-                  <div class="errors">
+                    </div>
+                    {% if form.errors %}
+                    <div class="errors">
                       <div class="alert alert-danger" role="alert">Hubo algunos errores en el comentario:</div>
                       <ul>
-                          {% for field_name, field_errors in form.errors.items %}
-                              {% for error in field_errors %}
-                                                  <li>Error en el campo "{{ field_name }}": {{ error }}</li>
-                              {% endfor %}
-                          {% endfor %}
+                        {% for field_name, field_errors in form.errors.items %}
+                        {% for error in field_errors %}
+                        <li>Error en el campo "{{ field_name }}": {{ error }}</li>
+                        {% endfor %}
+                        {% endfor %}
                       </ul>
-                  </div>
-              {% endif %}   
-  
-                </form>
+                    </div>
+                    {% endif %}   
+                    
+                  </form>
                 </div>
               </div>               
-                  </div>
-                  
-  
-              <hr class="my-0" />
-  
-            </div>  
+            </div>
+            
+            
+            <hr class="my-0" />
+            
+          </div>  
         </div>
       </div>
     </div>
-    </div>
-    </section>
-  
-  <section>
+  </div>
+</section>
+{% endif %}
+
+<section>
       <div class="container">
         <div class="row d-flex justify-content-center">
           <div class="col-xl-11">
@@ -183,7 +185,7 @@ body {
               <div class="card-body p-4">
                   {% if forloop.first %}
                 <h4 class="mb-0">Comentarios</h4>
-                <p class="fw-light mb-4 pb-2">¡Deja tu opinión del juego aquí!</p>
+                <p class="fw-light mb-4 pb-2">Esto opinan algunos de nuestros usuarios</p>
                   {% endif %}
                 <div class="d-flex flex-start">
                   <a href="{% url 'show_profile_page' comment.comment_author.id%}">
