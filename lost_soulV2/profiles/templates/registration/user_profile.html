@@ -39,7 +39,7 @@
     {% if page_user.avatar %}
           <div class="col-md-4 col-lg-4"><img class="profileimg" src="{{page_user.avatar.url}}" alt="Foto de perfil"></div>
           {% else %}
-          <div class="col-md-4 col-lg-4 profileimg"><img class="profileimg" src="{% static '/img/non-profile.png'%}" alt="Foto de perfil"></div>
+          <div class="col-md-4 col-lg-4"><img class="profileimg" src="{% static '/img/non-profile.png'%}" alt="Foto de perfil"></div>
       {% endif %}
       
       <div class="col-md-8 col-lg-8">
