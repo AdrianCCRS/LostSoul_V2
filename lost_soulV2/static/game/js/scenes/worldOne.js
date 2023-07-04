@@ -1,5 +1,8 @@
 import { Player } from "/static/game/js/classes/player.js";
 import { menuBar } from "/static/game/js/components/menuBar.js";
+
+var gscore = 0
+var firstFetch = true
 export class worldOne extends Phaser.Scene{
     constructor(){
         super({ key : "worldOne"});
@@ -24,6 +27,7 @@ export class worldOne extends Phaser.Scene{
     create(){
         
         this.createClock()
+        this.score=1000
 
         //Configurando el mapa.
         const map = this.make.tilemap({key:'map'})
@@ -65,7 +69,7 @@ export class worldOne extends Phaser.Scene{
     /**
      * Esta funcion mata al jugador
      */
-    playerHit(){
+    playerHit(){        
         
         this.player.play('death', true)
         this.pause = true
@@ -147,6 +151,43 @@ export class worldOne extends Phaser.Scene{
 function playerWin(player){
     if(player.body.touching.down){
         player.play('vanish', true)
+        gscore = this.score - (this.timeFormat*100)
+
+            if(firstFetch){
+            // Assuming you have a variable 'gscore' that holds the score value
+            const scoreData = { score: gscore };
+
+                        // Get the CSRF token from the cookie
+            const csrftoken = getCookie('csrftoken');
+
+            // POST request using the Fetch API
+            fetch('/save-score/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken, // Include the CSRF token in the headers
+            },
+            body: JSON.stringify(scoreData),
+            })
+            .then((response) => {
+                // Handle the response from Django
+                if (response.ok) {
+                // Handle success, if required
+                console.log('Score sent to Django successfully.');
+                console.log(scoreData)
+                } else {
+                // Handle errors, if required
+                console.error('Failed to send score to Django.');
+                }
+            })
+            .catch((error) => {
+                // Handle errors that occurred during the fetch, if needed
+                console.error('Error occurred during the fetch:', error);
+            });
+
+            firstFetch = false;
+        }
+
         this.time.addEvent({
             delay: 600,
             loop: false,
@@ -156,6 +197,13 @@ function playerWin(player){
         })
     }
 }
+
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+  
 
 export class endWorldOne extends Phaser.Scene{
     constructor(){

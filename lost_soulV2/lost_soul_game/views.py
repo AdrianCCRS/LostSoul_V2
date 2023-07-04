@@ -1,5 +1,7 @@
+from profiles.models import Profile
 from lost_soul_game.forms import NewCommentForm
 from .models import Comments
+from .forms import SetMaxScoreForm
 from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
@@ -29,5 +31,45 @@ def delete_comment(request, comment_id):
     comment = get_object_or_404(Comments, id=comment_id)
     if request.method == "POST" and request.user.profile == comment.comment_author:
         comment.delete()
-        messages.success(request, "Comentario eliminado correctamente")
-    return redirect('game')
+    return redirect('index')
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
+
+import json
+
+def save_score(request):
+    if request.method == 'POST':
+        # Parse the JSON data from the request body
+        score_data = json.loads(request.body)
+        score = score_data.get('score')
+
+        if score is not None:
+            # Do something with the score data, e.g., save it to the database
+            # Your processing logic here...
+            user = request.user
+            new_max_score = int(score)  # Convert score to an integer if needed
+            if(new_max_score > user.profile.max_score):
+                profile = Profile.objects.get(user=user)
+                profile.max_score = new_max_score
+                profile.save()
+                # Optionally, send a response back to the JavaScript code
+            return JsonResponse({'status': 'success', 'message': 'Score saved successfully.'})
+
+
+
+
+# Assuming you have the user object and the new max score value
+def update_max_score(user, new_max_score):
+    # Get the Profile object associated with the user
+    try:
+        profile = Profile.objects.get(user=user)
+    except Profile.DoesNotExist:
+        # Handle the case when the user does not have a profile
+        # You may create a new profile for the user if desired
+        return
+
+    # Update the max_score field
+    profile.max_score = new_max_score
+    profile.save()

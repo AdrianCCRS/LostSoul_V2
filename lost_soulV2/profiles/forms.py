@@ -44,8 +44,7 @@ class CreateProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ["public_username", "avatar"]
-        user = models.OneToOneField(User, on_delete=models.CASCADE)
-		
+        user = models.OneToOneField(User, on_delete=models.CASCADE)	
 
     
 

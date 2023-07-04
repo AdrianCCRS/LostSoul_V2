@@ -9,16 +9,6 @@
 
       .link-muted { color: #aaa; } .link-muted:hover { color: #1266f1; }
 
-      .pink-textarea textarea.md-textarea:focus:not([readonly]) {
-        border-bottom: 1px solid #f48fb1;
-        box-shadow: 0 1px 0 0 #f48fb1;
-      }
-      .active-pink-textarea.md-form label.active {
-        color: #f48fb1;
-      }
-      .active-pink-textarea.md-form textarea.md-textarea:focus:not([readonly])+label {
-        color: #f48fb1;
-      }
       .comment_break p {
         word-wrap: break-word;
       }
@@ -38,11 +28,19 @@
 {% if user.is_authenticated %}
 <div class="container-fluid px-10 my-5">
     <div class="row d-flex justify-content-center align-items-center">
-        <div class="col-xl-10">
+        <div class="col-xl-8">
             <div class="card border-0 rounded-3 shadow-lg overflow-hidden">
-                <div class="card-body p-0">
-                    <div id="juego" class="canvas-container mb-4"></div>
+                <div class="card-body p-0 d-flex col-12 align-items-center">
+                    <div id="juego" class="canvas-container mb-2 col-12"></div>
                 </div>
+
+                <div class="card-body p-0 d-flex col-12 align-items-center justify-content-center">
+                <div class="card border-0 rounded-3 shadow-lg overflow-hidden bg-dark col-3 mb-2 " style="height= 300px">
+                  <div class="card-body p-0"  style="height= 300px">
+                    <div class="d-flex justify-content-center align-items-center"><h5 class="text-light text-center"> Puntaje Máximo: <br> {{user.profile.max_score}}</h5></div>
+                    </div>
+                </div>
+              </div>
             </div>
         </div>
     </div>
@@ -79,42 +77,16 @@
                 </div>
                 {% if form.errors %}
                 <div class="errors">
-                    <div class="alert alert-danger" role="alert">Hubo algunos errores en el formulario:</div>
+                    <div class="alert alert-danger" role="alert">Hubo algunos errores en el comentario:</div>
                     <ul>
                         {% for field_name, field_errors in form.errors.items %}
-                            {% if field_name == 'email' %}
-                                {% for error in field_errors %}
-                                    <li> {{ error }}</li>
-                                {% endfor %}
-                            {% elif field_name == 'username' %}
-                                {% for error in field_errors %}
-                                    <li> {{ error }}</li>
-                                {% endfor %}
-                            {% elif field_name == 'password1' %}
-                                {% for error in field_errors %}
-                                    <li> {{ error }}</li>
-                                {% endfor %}
-                            {% elif field_name == 'password2' %}
-                                {% for error in field_errors %}
-                                    <li> {{ error }}</li>
-                                {% endfor %}
-                            {% else %}
                             {% for error in field_errors %}
                                                 <li>Error en el campo "{{ field_name }}": {{ error }}</li>
-                                                {% endfor %}
-                            {% endif %}
+                            {% endfor %}
                         {% endfor %}
                     </ul>
                 </div>
             {% endif %}   
-            
-            {% if messages %}
-                    {% for message in messages %}
-                        {% if message.tags == 'error' %}
-                            <div class="alert alert-danger" role="alert">{{ message }}</div>
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}  
 
               </form>
               </div>
@@ -215,7 +187,9 @@
 {% endblock content %}
 {% block extrajs %}
 {% if user.is_authenticated %}
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script type="module" src="{% static '/game/js/game.js'%}"></script>
+<script type="module" src="{% static '/game/js/getScore.js'%}" ></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const targetDiv = document.getElementById("juego");
