@@ -4,5 +4,5 @@ from . import views
 urlpatterns = [
     path('game/', views.game, name='game'),
     path('delete_comment/<int:comment_id>/', views.delete_comment, name='delete_comment'),
-        path('save-score/', views.save_score, name='save_score'),
+    path('save-score/', views.save_score, name='save_score'),
 ]

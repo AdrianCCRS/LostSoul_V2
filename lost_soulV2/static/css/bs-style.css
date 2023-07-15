@@ -1,37 +1,16 @@
-.dropdown-li-mod:hover{
-    background-color: #db2638;
+.nav-link{
+    color: #8a918e !important;
 }
-.container-mod{
-    padding-top: 2%;
-}
-
-.nav-link-mod:hover{
-    color: #db2638;
+.nav-link-mod:hover {
+    color: #db2638 !important;
 }
 
-.canvas-container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    height: 100%;
-    padding-top: 20px; /* Espacio en la parte superior */
-  }
-
-.footer-mod{
-    padding-left: 2%;
-    padding-right: 2%;
-    margin-bottom: 0 !important ; 
-}
-
-a{
+a {
     color: #db2638;
     text-decoration: none;
 }
-a:hover{
+
+a:hover {
     color: #8a000e;
     text-decoration: none;
 }
-
-
-
-

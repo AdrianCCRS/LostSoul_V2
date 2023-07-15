@@ -21,118 +21,107 @@
 {% endblock extrahead %}
 {% block content %}
 <section>
-  <div class="container h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-md">
-          <div class="card text-black" style="border-radius: 25px;">
-              <div class="card-body p-md-5">
-                  <div class="row justify-content-center">
-                      <div class="col-md">
-                          <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Configuración de cuenta</p>
-<div class="container-xl px-4 mt-4">
-  <div class="row">
-    <div class="col-xl-4">
-      <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <!-- Profile picture card-->
-        <div class="card mb-4 mb-xl-0">
-          <div class="card-header">Información de perfil</div>
-            <div class="card-body text-center">
-              <!-- Profile picture image-->
-              <div class="profile-picture-container">
-                {% if user.profile.avatar %}
-                <img class="img-account-profile rounded-circle mb-2" id="profile-picture-preview" src="{{user.profile.avatar.url}}" alt="Foto de perfil">
-                {% else %}
-                <img class="img-account-profile rounded-circle mb-2" id="profile-picture-preview" src="{% static '/img/non-profile.png'%}" alt="Foto de perfil">
-                {% endif %}
-              </div>                    
-            
-                      
-                      <div class="py-4 "><b>Bio: </b>{{user.profile.bio}}</div>
-              </div>
-          </div>
-      </div>
-      <div class="col-xl-8">
-          <!-- Account details card-->
-          <div class="card mb-4">
-              <div class="card-header">Detalles de la cuenta</div>
-              <div class="card-body">
-                      <!-- Form Group (username)-->
-                      <div class="mb-3">
-                          <label class="small mb-1" for="{{form.username.id_for_label}}">Nombre de usuario privado (Lo necesitarás para ingresar a tu cuenta)</label>
-                          <input class="form-control" id="{{form.username.id_for_label}}" name="{{form.username.html_name}} "type="text" placeholder="Ingrese su nombre de usuario" value="{{ request.user.username }}">
-                      </div>
-                      <!-- Form Row-->
-                      <div class="mb-3">
-                        <label class="small mb-1" for="{{form.email.id_for_label}}">Correo electrónico (De esta manera nos podremos comunicar contigo)</label>
-                        <input class="form-control" id="{{form.email.id_for_label}}" name="{{form.email.html_name}} "type="email" placeholder="Ingrese su correo electrónico" value="{{ request.user.email }}">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md">
+                <div class="card text-black" style="border-radius: 25px;">
+                    <div class="card-body p-md-5">
+                        <div class="row justify-content-center">
+                            <div class="col-md">
+                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Configuración de cuenta</p>
+                                <div class="container-xl px-4 mt-4">
+                                    <div class="row">
+                                        <div class="col-xl-4">
+                                            <form method="post" enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                <div class="card mb-4 mb-xl-0">
+                                                <div class="card-header">Información de perfil</div>
+                                                    <div class="card-body text-center">
+                                                        <!-- Profile picture image-->
+                                                        <div class="profile-picture-container">
+                                                        {% if user.profile.avatar %}
+                                                            <img class="img-account-profile rounded-circle mb-2" id="profile-picture-preview" src="{{user.profile.avatar.url}}" alt="Foto de perfil">
+                                                        {% else %}
+                                                            <img class="img-account-profile rounded-circle mb-2" id="profile-picture-preview" src="{% static '/img/non-profile.png'%}" alt="Foto de perfil">
+                                                        {% endif %}
+                                                        </div>                    
+                                                        <div class="py-4 "><b>Bio: </b>{{user.profile.bio}}</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xl-8">
+                                                    <!-- Detalles de la cuenta-->
+                                                    <div class="card mb-4">
+                                                        <div class="card-header">Detalles de la cuenta</div>
+                                                            <div class="card-body">
+                                                                <!-- Nombre de usuario-->
+                                                                <div class="mb-3">
+                                                                    <label class="small mb-1" for="{{form.username.id_for_label}}">Nombre de usuario privado (Lo necesitarás para ingresar a tu cuenta)</label>
+                                                                    <input class="form-control" id="{{form.username.id_for_label}}" name="{{form.username.html_name}} "type="text" placeholder="Ingrese su nombre de usuario" value="{{ request.user.username }}">
+                                                                </div>
+                                                                <!-- Correo-->
+                                                                <div class="mb-3">
+                                                                    <label class="small mb-1" for="{{form.email.id_for_label}}">Correo electrónico (De esta manera nos podremos comunicar contigo)</label>
+                                                                    <input class="form-control" id="{{form.email.id_for_label}}" name="{{form.email.html_name}} "type="email" placeholder="Ingrese su correo electrónico" value="{{ request.user.email }}">
+                                                                </div>  
+                                                                <!-- Contraseña-->
+                                                                <div class="mb-3">
+                                                                    <label class="small mb-1" for="{{form.password1.id_for_label}}">Contraseña (Confirma que eres tú)</label>
+                                                                    <input class="form-control" id="{{form.password1.id_for_label}}" name="{{form.password1.html_name}} "type="password">
+                                                                </div>
+                                                                <!-- Confirmar contraseña-->
+                                                                <div class="mb-3">
+                                                                    <label class="small mb-1" for="{{form.password2.id_for_label}}">Confirma tu contraseña</label>
+                                                                    <input class="form-control" id="{{form.password2.id_for_label}}" name="{{form.password2.html_name}} "type="password">
+                                                                </div>
+                                                                <!-- Submit-->
+                                                                <div class="d-flex justify-content-center"><button class="btn btn-danger mt-3" type="submit">Guardar cambios</button></div>
+                                                                <div class=" d-flex justify-content-end text-muted small"><a href="{% url 'change_password'%}" style="color: gray">Cambiar contraseña</a></div> 
+                                                            </div>
+                                                            <!--Errores en el formulario-->
+                                                            {% if form.errors %}
+                                                                <div class="errors">
+                                                                    <div class="alert alert-danger" role="alert">Hubo algunos errores en el formulario:</div>
+                                                                    <ul>
+                                                                        {% for field_name, field_errors in form.errors.items %}
+                                                                            {% if field_name == 'email' %}
+                                                                                {% for error in field_errors %}
+                                                                                    <li> {{ error }}</li>
+                                                                                {% endfor %}
+                                                                            {% elif field_name == 'username' %}
+                                                                                {% for error in field_errors %}
+                                                                                    <li> {{ error }}</li>
+                                                                                {% endfor %}
+                                                                            {% elif field_name == 'password1' %}
+                                                                                {% for error in field_errors %}
+                                                                                    <li> {{ error }}</li>
+                                                                                {% endfor %}
+                                                                            {% elif field_name == 'password2' %}
+                                                                                {% for error in field_errors %}
+                                                                                    <li> {{ error }}</li>
+                                                                                {% endfor %}
+                                                                            {% else %}
+                                                                            {% for error in field_errors %}
+                                                                            <li> {{ error }}</li>
+                                                                            {% endfor %}
+                                                                            {% endif %}
+                                                                        {% endfor %}
+                                                                    </ul>
+                                                                </div>
+                                                            {% endif %}
+                                                    </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    
-                  <!-- Form Row-->
-                  <div class="mb-3">
-                    <label class="small mb-1" for="{{form.password1.id_for_label}}">Contraseña (Confirma que eres tú)</label>
-                    <input class="form-control" id="{{form.password1.id_for_label}}" name="{{form.password1.html_name}} "type="password">
                 </div>
-                <!-- Form Row-->
-                <div class="mb-3">
-                  <label class="small mb-1" for="{{form.password2.id_for_label}}">Confirma tu contraseña</label>
-                  <input class="form-control" id="{{form.password2.id_for_label}}" name="{{form.password2.html_name}} "type="password">
-                </div>
-                      <!-- Save changes button-->
-                      <div class="d-flex justify-content-center"><button class="btn btn-danger mt-3" type="submit">Guardar cambios</button></div>
-                      <div class=" d-flex justify-content-end text-muted small"><a href="{% url 'change_password'%}" style="color: gray">Cambiar contraseña</a></div>
-                      
-                    </div>
-              {% if form.errors %}
-                          <div class="errors">
-                              <div class="alert alert-danger" role="alert">Hubo algunos errores en el formulario:</div>
-                              <ul>
-                                  {% for field_name, field_errors in form.errors.items %}
-                                      {% if field_name == 'email' %}
-                                          {% for error in field_errors %}
-                                              <li> {{ error }}</li>
-                                          {% endfor %}
-                                      {% elif field_name == 'username' %}
-                                          {% for error in field_errors %}
-                                              <li> {{ error }}</li>
-                                          {% endfor %}
-                                      {% elif field_name == 'password1' %}
-                                          {% for error in field_errors %}
-                                              <li> {{ error }}</li>
-                                          {% endfor %}
-                                      {% elif field_name == 'password2' %}
-                                          {% for error in field_errors %}
-                                              <li> {{ error }}</li>
-                                          {% endfor %}
-                                      {% else %}
-                                      {% for error in field_errors %}
-                                      <li> {{ error }}</li>
-                                      {% endfor %}
-                                      {% endif %}
-                                  {% endfor %}
-                              </ul>
-                          </div>
-                      {% endif %}   
-                      
-                      {% if messages %}
-                              {% for message in messages %}
-                                  {% if message.tags == 'error' %}
-                                      <div class="alert alert-danger" role="alert">{{ message }}</div>
-                                  {% endif %}
-                              {% endfor %}
-                          {% endif %}  
-          </div>
-      </form>
-      </div>
-  </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+            </div>
+        </div>
+    </div>
 </section>
 {% endblock content %}
 {% block extrajs %}

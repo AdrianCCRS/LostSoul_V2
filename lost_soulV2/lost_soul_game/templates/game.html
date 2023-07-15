@@ -7,15 +7,8 @@
         background: linear-gradient(to right, #6f1120, #e70027);
       }
 
-      .link-muted { color: #aaa; } .link-muted:hover { color: #1266f1; }
-
       .comment_break p {
         word-wrap: break-word;
-      }
-      .form-control-mod {
-        height: auto;
-        max-height: 200px; /* Establece aquí el valor que desees */
-        resize: vertical; /* Permite redimensionar verticalmente el textarea */
       }
 
       .lg-comment{
@@ -29,9 +22,9 @@
 <div class="container-fluid px-10 my-5">
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col-xl-8">
-            <div class="card border-0 rounded-3 shadow-lg overflow-hidden">
+            <div class="card border-0 rounded-3 shadow-lg overflow-hidden bg-dark">
                 <div class="card-body p-0 d-flex col-12 align-items-center">
-                    <div id="juego" class="canvas-container mb-2 col-12"></div>
+                    <div id="juego" class="d-flex justify-content-center align-items-start py-2 mb-2 col-12"></div>
                 </div>
 
                 <div class="card-body p-0 d-flex col-12 align-items-center justify-content-center">
@@ -52,7 +45,7 @@
 <section>
   <div class="container">
     <div class="row d-flex justify-content-center">
-      <div class="col-xl-9 mb-3">
+      <div class="col-xl-11 mb-3">
           <div class="card bg bg-dark text-light mb-2">
             <div class="card-body p-4">
               <h4 class="mb-0">Añadir comentario</h4>
@@ -81,13 +74,12 @@
                     <ul>
                         {% for field_name, field_errors in form.errors.items %}
                             {% for error in field_errors %}
-                                                <li>Error en el campo "{{ field_name }}": {{ error }}</li>
+                              <li>Error en el campo "{{ field_name }}": {{ error }}</li>
                             {% endfor %}
                         {% endfor %}
                     </ul>
                 </div>
             {% endif %}   
-
               </form>
               </div>
             </div>               
@@ -104,11 +96,11 @@
   </section>
 
 <section>
-    <div class="container">
+    <div class="container" >
       <div class="row d-flex justify-content-center">
         <div class="col-xl-11">
 {% for comment in comments_list %}
-          <div class="card text-dark mb-2">
+          <div class="card bg-dark text-light mb-2">
             <div class="card-body p-4">
                 {% if forloop.first %}
               <h4 class="mb-0">Comentarios</h4>
@@ -163,12 +155,12 @@
 {% else %}
 <div class="container-fluid px-10 my-5">
     <div class="row d-flex justify-content-center align-items-center">
-        <div class="col-xl-10">
+        <div class="col-xl-8">
             <div class="card border-0 rounded-3 shadow-lg overflow-hidden">
                 <div class="card-body p-0">
-                    <div class="canvas-container mb-4">
+                    <div class="d-flex justify-content-center align-items-start my-4 mb-4">
                         <div class="d-flex justify-content-center align-items-center">
-                            <div class="alert alert-danger" role="alert">
+                            <div class="alert alert-danger mb-0" role="alert">
                                 <h4 class="alert-heading">¡Debes iniciar sesión!</h4>
                                 <p>Para poder jugar debes iniciar sesión, si no tienes una cuenta puedes registrarte
                                     <a href="{% url 'registro' %}">aquí</a>.</p>

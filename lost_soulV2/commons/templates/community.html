@@ -4,234 +4,213 @@
 <title>Comunidad | LostSoul</title>
 <style>
 
-bg-white {
-  background-color: #ffffff !important;
-}
+  table td,
+  table th {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
 
-table td,
-table th {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
+  .card {
+    border-radius: .5rem;
+  }
 
-.card {
-  border-radius: .5rem;
-}
+  .table-scroll {
+    border-radius: .5rem;
+  }
 
-.table-scroll {
-  border-radius: .5rem;
-}
+  thead {
+    top: 0;
+    position: sticky;
+  }
 
-thead {
-  top: 0;
-  position: sticky;
-}
+  body {
+    background: #6f1120;
+    background: linear-gradient(to right, #6f1120, #e70027);
+  }
 
-body {
-  background: #6f1120;
-  background: linear-gradient(to right, #6f1120, #e70027);
-}
+  .comment_break p {
+    word-wrap: break-word;
+  }
 
-.link-muted { color: #aaa; } .link-muted:hover { color: #1266f1; }
-
-.comment_break p {
-  word-wrap: break-word;
-}
-.form-control-mod {
-  height: auto;
-  max-height: 200px; /* Establece aquí el valor que desees */
-  resize: vertical; /* Permite redimensionar verticalmente el textarea */
-}
-
-.lg-comment{
-  width: 100%;
-}
+  .lg-comment {
+    width: 100%;
+  }
+  
 </style>
 {% endblock extrahead %}
 {% block content %}
-<div class="d-flex justify-content-center text-light"><h1>Comunidad: <small style="color: rgb(226, 226, 226)">Un espacio para compartir</small> </h1></div>
+<div class="d-flex justify-content-center text-light">
+  <h1>Comunidad: <small style="color: rgb(226, 226, 226)">Un espacio para compartir</small> </h1>
+</div>
 <section class="my-5 ">
-    <div class="container h-100">
-      <div class="mask d-flex align-items-center h-100 me-5">
-        <div class="container d-flex col-12">
-          <div class="row justify-content-center col-7">
-            <div class="col">
-              <div class="card shadow-2-strong border-0 rounded-3 shadow-lg overflow-hidden">
-                <div class="card-body bg bg-dark ">
-                  <div class="table-responsive table-scroll"  style="position: relative; height: auto">
-                    <table class="table table-dark mb-0">
-                        <h2 class="text-light m-4 d-flex justify-content-center">Ranking de los mejores</h2>
-                        <thead style="background-color: #393939;">
-                          <tr class="text-uppercase text-danger">
-                              <th scope="col" class="text-center">Avatar</th>
-                              <th scope="col" class="text-center">Jugador</th>
-                              <th scope="col" class="text-center">Puntaje</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                        {% for profile_rank in top_profiles %}
-                        <tr >
-                          <td class="d-flex justify-content-center">
-                            <a href="{% url 'show_profile_page' profile_rank.id%}">
-                              {% if  profile_rank.avatar %}
-                              <img
-                              src="{{ profile_rank.avatar.url }}"
-                              class="rounded-circle"
-                              height="45"
-                              alt="Perfil defecto"
-                              style="width:60px; height:60px;"
-                              />
-                              {% else %}
-                              <img
-                              src="{% static 'img/non-profile.png' %}"
-                              class="rounded-circle"
-                              height="45"
-                              alt="Perfil defecto"
-                              style="width:60px; height:60px;"
-                              />
-                              {% endif %}
-                            </a>
-                            </td>
-                          <td><p class="d-flex justify-content-center">{{profile_rank.public_username}}</p></td>
-                          <td><p class="d-flex justify-content-center">{{profile_rank.max_score}}</p></td>
-                        </tr>
-                        {% endfor %}
-                      </tbody>
-                    </table>
+  <div class="container h-100">
+    <div class="mask d-flex align-items-center h-100 me-5">
+      <div class="container d-flex col-12">
+        <div class="row justify-content-center col-7">
+          <div class="col">
+            <div class="card shadow-2-strong border-0 rounded-3 shadow-lg overflow-hidden">
+              <div class="card-body bg bg-dark ">
+                <div class="table-responsive table-scroll" style="position: relative; height: auto">
+                  <table class="table table-dark mb-0">
+                    <h2 class="text-light m-4 d-flex justify-content-center">Ranking de los mejores</h2>
+                    <thead style="background-color: #393939;">
+                      <tr class="text-uppercase text-danger">
+                        <th scope="col" class="text-center">Avatar</th>
+                        <th scope="col" class="text-center">Jugador</th>
+                        <th scope="col" class="text-center">Puntaje</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for profile_rank in top_profiles %}
+                      <tr>
+                        <td class="d-flex justify-content-center">
+                          <a href="{% url 'show_profile_page' profile_rank.id%}">
+                            {% if profile_rank.avatar %}
+                            <img src="{{ profile_rank.avatar.url }}" class="rounded-circle" height="45"
+                              alt="Perfil defecto" style="width:60px; height:60px;" />
+                            {% else %}
+                            <img src="{% static 'img/non-profile.png' %}" class="rounded-circle" height="45"
+                              alt="Perfil defecto" style="width:60px; height:60px;" />
+                            {% endif %}
+                          </a>
+                        </td>
+                        <td>
+                          <p class="d-flex justify-content-center">{{profile_rank.public_username}}</p>
+                        </td>
+                        <td>
+                          <p class="d-flex justify-content-center">{{profile_rank.max_score}}</p>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row justify-content-center col-6 ms-2">
+          <div class="card shadow-2-strong border-0 rounded-3 shadow-lg overflow-hidden"
+            style="  background-image: url('/static/img/main-menu-bg.png'); background-position-y:  center;">
+            <div class="card-body p-0">
+              <div class="container" id="rank-anim">
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if user.is_authenticated %}
+<section>
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+      <div class="col-xl-11 mb-3">
+        <div class="card bg bg-dark text-light mb-2">
+          <div class="card-body p-4">
+            <h4 class="mb-0">Añadir comentario</h4>
+            <p class="fw-light mb-4 pb-2">¿Qué opinas?</p>
+            <div class="d-flex flex-start">
+              {% if user.profile.avatar %}
+              <img class="rounded-circle shadow-1-strong me-3" src="{{user.profile.avatar.url}}" alt="avatar" width="60"
+                height="60" />
+              {% else %}
+              <img class="rounded-circle shadow-1-strong me-3" src="{% static '/img/non-profile.png'%}" alt="avatar"
+                width="60" height="60" />
+              {% endif %}
+              <div class="lg-comment">
+                <h6 class="fw-bold mb-1">{{user.profile.public_username}}</h6>
+                <form action="{% url 'community'%}" method="post">
+                  {% csrf_token %}
+                  <div class="comment-area">
+                    <textarea class="form-control lg-comment my-3" id="{{comment_form.body.id_for_label}}"
+                      name="{{comment_form.body.html_name}}" placeholder="Creo que LostSoul es..." rows="4"></textarea>
+                    <button type="submit" class="btn btn-danger d-flex justify-content-end">Enviar</button>
                   </div>
-                </div>
+                  {% if form.errors %}
+                  <div class="errors">
+                    <div class="alert alert-danger" role="alert">Hubo algunos errores en el comentario:</div>
+                    <ul>
+                      {% for field_name, field_errors in form.errors.items %}
+                      {% for error in field_errors %}
+                      <li>Error en el campo "{{ field_name }}": {{ error }}</li>
+                      {% endfor %}
+                      {% endfor %}
+                    </ul>
+                  </div>
+                  {% endif %}
+                </form>
               </div>
             </div>
           </div>
 
-          <div class="row justify-content-center col-6 ms-2" >
-            <div class="card shadow-2-strong border-0 rounded-3 shadow-lg overflow-hidden" style="  background-image: url('/static/img/main-menu-bg.png'); background-position-y:  center;">
-              <div class="card-body p-0">
-                <div class="container" id="rank-anim"> 
-                </div>
-              </div>
-            </div>
-            
-          </div>
+          <hr class="my-0" />
 
         </div>
       </div>
     </div>
-  </section>
-  
-  {% if user.is_authenticated %}
-  <section>
-    <div class="container">
-      <div class="row d-flex justify-content-center">
-        <div class="col-xl-9 mb-3">
-          <div class="card bg bg-dark text-light mb-2">
-            <div class="card-body p-4">
-              <h4 class="mb-0">Añadir comentario</h4>
-              <p class="fw-light mb-4 pb-2">¿Qué opinas?</p>
-              <div class="d-flex flex-start">
-                {% if user.profile.avatar %}
-                <img class="rounded-circle shadow-1-strong me-3"
-                src="{{user.profile.avatar.url}}" alt="avatar" width="60"
-                height="60" />
-                {% else %}
-                <img class="rounded-circle shadow-1-strong me-3"
-                src="{% static '/img/non-profile.png'%}" alt="avatar" width="60"
-                height="60" />
-                {% endif %}
-                <div class="lg-comment">
-                  <h6 class="fw-bold mb-1">{{user.profile.public_username}}</h6>
-                  <form action="{% url 'community'%}" method="post"> 
-                    {% csrf_token %} 
-                    <div class="comment-area">                             
-                      <textarea class="form-control lg-comment my-3" id="{{comment_form.body.id_for_label}}" name="{{comment_form.body.html_name}}" placeholder="Creo que LostSoul es..." rows="4"></textarea>
-                      <button type="submit"  class="btn btn-danger d-flex justify-content-end">Enviar</button>
-                    </div>
-                    {% if form.errors %}
-                    <div class="errors">
-                      <div class="alert alert-danger" role="alert">Hubo algunos errores en el comentario:</div>
-                      <ul>
-                        {% for field_name, field_errors in form.errors.items %}
-                        {% for error in field_errors %}
-                        <li>Error en el campo "{{ field_name }}": {{ error }}</li>
-                        {% endfor %}
-                        {% endfor %}
-                      </ul>
-                    </div>
-                    {% endif %}   
-                    
-                  </form>
-                </div>
-              </div>               
-            </div>
-            
-            
-            <hr class="my-0" />
-            
-          </div>  
-        </div>
-      </div>
-    </div>
+  </div>
   </div>
 </section>
 {% endif %}
 
 <section>
-      <div class="container">
-        <div class="row d-flex justify-content-center">
-          <div class="col-xl-11">
-  {% for comment in comments_list %}
-            <div class="card text-light bg-dark mb-2">
-              <div class="card-body p-4">
-                  {% if forloop.first %}
-                <h4 class="mb-0">Comentarios</h4>
-                <p class="fw-light mb-4 pb-2">Esto opinan algunos de nuestros usuarios</p>
-                  {% endif %}
-                <div class="d-flex flex-start">
-                  <a href="{% url 'show_profile_page' comment.comment_author.id%}">
-                  {% if comment.comment_author.avatar %}
-                  <img class="rounded-circle shadow-1-strong me-3"
-                    src="{{comment.comment_author.avatar.url}}" alt="avatar" width="60"
-                    height="60" />
-                  {% else %}
-                  <img class="rounded-circle shadow-1-strong me-3"
-                    src="{% static '/img/non-profile.png'%}" alt="avatar" width="60"
-                    height="60" />
-                  {% endif %}
-                  </a>
-                  <div>
-                    <h6 class="fw-bold mb-1">{{comment.comment_author.public_username}}</h6>
-                    <div class="d-flex align-items-center mb-3 comment_break">
-                      <p class="mb-0">
-                        {{comment.date_added}}
-                      </p>
-                      
-                    </div>
-                    <p class="mb-0">
-                      {{comment.body}}
-                    </p>
-                    {% if request.user.profile == comment.comment_author %}
-              <form method="POST" action="{% url 'delete_comment' comment.id %}">
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+      <div class="col-xl-11">
+        {% for comment in comments_list %}
+        <div class="card text-light bg-dark mb-2">
+          <div class="card-body p-4">
+            {% if forloop.first %}
+            <h4 class="mb-0">Comentarios</h4>
+            <p class="fw-light mb-4 pb-2">Esto opinan algunos de nuestros usuarios</p>
+            {% endif %}
+            <div class="d-flex flex-start">
+              <a href="{% url 'show_profile_page' comment.comment_author.id%}">
+                {% if comment.comment_author.avatar %}
+                <img class="rounded-circle shadow-1-strong me-3" src="{{comment.comment_author.avatar.url}}"
+                  alt="avatar" width="60" height="60" />
+                {% else %}
+                <img class="rounded-circle shadow-1-strong me-3" src="{% static '/img/non-profile.png'%}" alt="avatar"
+                  width="60" height="60" />
+                {% endif %}
+              </a>
+              <div>
+                <h6 class="fw-bold mb-1">{{comment.comment_author.public_username}}</h6>
+                <div class="d-flex align-items-center mb-3 comment_break">
+                  <p class="mb-0">
+                    {{comment.date_added}}
+                  </p>
+
+                </div>
+                <p class="mb-0">
+                  {{comment.body}}
+                </p>
+                {% if request.user.profile == comment.comment_author %}
+                <form method="POST" action="{% url 'delete_comment' comment.id %}">
                   {% csrf_token %}
                   <button type="submit" class="btn btn-danger my-3">Eliminar comentario</button>
-              </form>
-              {% endif %}
-                  </div>
-                </div>
+                </form>
+                {% endif %}
               </div>
-  
-              
-    
-              <hr class="my-0" />
-  
-            </div>  
+            </div>
+          </div>
+          <hr class="my-0" />
+
+        </div>
         {% endfor %}
-  
+
       </div>
+    </div>
   </div>
-  </div>
-  </section>
-  
+</section>
+
 {% endblock content %}
 {% block extrajs %}
 <script src="{% static '/extra-animations/community-anim.js'%}"></script>
