@@ -6,12 +6,6 @@ Proyecto para programación en la web hecho por: Yeison Adrián Cáceres Torres
 
 Este proyecto es un juego tipo plataformas con estilo de arte pixelado, creado utilizando el motor Phaser. El juego está montado en un sitio web administrado con Django, lo que permite un control eficiente y la gestión de contenido adicional. Esta combinación permite un control del juego y la posibilidad de administrar contenido adicional, como información y una sección de comunidad para compartir puntajes y opiniones entre los jugadores.
 
-## Superusuario
-
-Se ha creado un superusuario para acceder al panel de administración de Django:
-- Nombre de usuario: admin
-- Contraseña: yeisonccrs17
-
 
 ## Detalles técnicos
 
